@@ -1,0 +1,26 @@
+{
+  "name": "miskab",
+  "version": "1.0.0",
+  "description": "I’m someone who’s always been curious about how things work — as a kid I broke things just to understand where does the smoke come from when things break, and now over the years, that curiosity has grown into a career focused on helping people and organizations use technology in smarter, more sustainable, and more human-centered ways. Less breaking things and more building things.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiskaB/MiskaB.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MiskaB/MiskaB/issues"
+  },
+  "homepage": "https://github.com/MiskaB/MiskaB#readme",
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "vite": "^6.3.4"
+  }
+}
