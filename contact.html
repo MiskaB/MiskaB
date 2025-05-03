@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Get in touch with Miska Braun through this contact page." />
+  <meta name="author" content="Miska Braun" />
+  <title>Contact - Miska Braun</title>
+  <style>
+    /* Background Image Layer */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url("images/AI_2025_sky.png") no-repeat center center;
+      background-size: cover;
+      opacity: 0.82;
+      z-index: -1;
+      filter: grayscale(70%) blur(0.1px);
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #f1f1f1;
+      color: #2a2a2a;
+    }
+
+    /* Left-hand vertical nav */
+    nav {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 0 10px 10px 0;
+      padding: 1em 0.5em;
+      backdrop-filter: blur(5px);
+      transition: background 0.3s;
+    }
+
+    nav:hover {
+      background: rgba(0, 0, 0, 0.85);
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      align-items: center;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      transition: all 0.3s ease;
+      font-size: 1.85rem;
+    }
+
+    nav ul li a:hover {
+      color: #ffd700;
+      font-size: 1.95rem;
+      transform: rotate(180deg) scale(1.00);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        top: unset;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        transform: none;
+        border-radius: 10px 10px 0 0;
+        padding: 0.5em;
+      }
+
+      nav ul {
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+      nav ul li a {
+        writing-mode: horizontal-tb;
+        transform: none;
+        font-size: 0.9rem;
+      }
+
+      nav ul li a:hover {
+        transform: scale(1.15);
+      }
+    }
+
+    section {
+      padding: 2em;
+      max-width: 900px;
+      margin: 6em auto 2em auto;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #222;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.5em;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input, textarea {
+      padding: 0.75em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
+      width: 100%;
+    }
+
+    button {
+      background-color: #2255aa;
+      color: white;
+      padding: 0.75em 1.5em;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #113377;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2em;
+      background-color: rgba(240, 240, 240, 0.9);
+      margin-top: 2em;
+      border-top: 1px solid #ccc;
+    }
+
+    a {
+      color: #2255aa;
+      font-weight: bold;
+    }
+
+    a:hover {
+      color: #113377;
+    }
+
+    .scroll-down {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2em;
+      color: #04040d;
+      text-align: center;
+      animation: bounce 1.5s infinite;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .scroll-down span {
+      display: block;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+
+    .scroll-down:hover {
+      color: #f7f71b;
+      transform: translateX(-50%) scale(1.1);
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left-hand Vertical Navigation -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="freetime.html">Freetime</a></li>
+      <li><a href="cv.html">CV/Professional</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>If you'd like to get in touch with me, feel free to use the form below or connect via <a href="https://www.linkedin.com/in/miskabraun/" target="_blank">LinkedIn</a>.</p>
+    <form action="mailto:miskabraun@gmail.com" method="post" enctype="text/plain">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="6" required></textarea>
+
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Miska Braun</p>
+  </footer>
+
+  <div class="scroll-down" onclick="document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });">
+    ↓
+    <span>Scroll Down</span>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Explore Miska Braun’s personal interests in travel, ice hockey, cars, and family." />
+  <meta name="author" content="Miska Braun" />
+  <title>Freetime - Miska Braun</title>
+  <style>
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url("images/AI_2025_sky.png") no-repeat center center;
+      background-size: cover;
+      opacity: 0.82;
+      z-index: -1;
+      filter: grayscale(70%) blur(0.1px);
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #f1f1f1;
+      color: #2a2a2a;
+    }
+
+    nav {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 0 10px 10px 0;
+      padding: 1em 0.5em;
+      backdrop-filter: blur(5px);
+      transition: background 0.3s;
+    }
+
+    nav:hover {
+      background: rgba(0, 0, 0, 0.85);
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      align-items: center;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      transition: all 0.3s ease;
+      font-size: 1.85rem;
+    }
+
+    nav ul li a:hover {
+      color: #ffd700;
+      font-size: 1.95rem;
+      transform: rotate(180deg) scale(1.00);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        top: unset;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        transform: none;
+        border-radius: 10px 10px 0 0;
+        padding: 0.5em;
+      }
+
+      nav ul {
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+      nav ul li a {
+        writing-mode: horizontal-tb;
+        transform: none;
+        font-size: 0.9rem;
+      }
+
+      nav ul li a:hover {
+        transform: scale(1.15);
+      }
+    }
+
+    section {
+      padding: 2em;
+      max-width: 900px;
+      margin: 6em auto 2em auto;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #222;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.5em;
+    }
+
+    .text {
+      margin-bottom: 2em;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5em;
+      justify-content: center;
+    }
+
+    .gallery img {
+      width: 200px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .gallery img:hover {
+      transform: scale(1.08);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .fullscreen-img {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      display: none;
+    }
+
+    .fullscreen-img img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+
+    .fullscreen-img.active {
+      display: flex;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2em;
+      background-color: rgba(240, 240, 240, 0.9);
+      margin-top: 2em;
+      border-top: 1px solid #ccc;
+    }
+
+    a {
+      color: #2255aa;
+      font-weight: bold;
+    }
+
+    a:hover {
+      color: #113377;
+    }
+
+    @media (max-width: 768px) {
+      .gallery img {
+        width: 42vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="freetime.html">Freetime</a></li>
+      <li><a href="cv.html">CV/Professional</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="freetime">
+    <h2>Freetime</h2>
+    <div class="text">
+      <p>
+        I'm passionate about <strong>ice hockey</strong> and community sports — they keep me active, grounded, and offer a great way to connect with people. Whether it's coaching, playing, or cheering, hockey is a lifelong love.
+      </p>
+      <p>
+        <strong>Traveling</strong> also plays a big role in my life. I’m always looking for ways to recharge and learn through new cultures, landscapes, and spontaneous adventures.
+      </p>
+      <p>
+        I’m also a vintage car enthusiast. Meet my <strong>Dodge Dart -64 GT</strong> — a personal project I’ve been restoring with care. I love combining craftsmanship with history under the hood.
+      </p>
+      <p>
+        <strong>Family</strong> plays a central role in my life. It’s the foundation of my support system and a source of daily motivation. Whether it’s spending time together outdoors, sharing routines, or simply being present — those are the most meaningful moments.
+      </p>
+    </div>
+
+    <div class="gallery">
+      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/icehockey.jpg" alt="Ice Hockey" onclick="openFullscreen(this)">
+      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/travel.jpg" alt="Nature Travel" onclick="openFullscreen(this)">
+      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/car.jpg" alt="Dodge Dart GT" onclick="openFullscreen(this)">
+      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/family_miska.PNG" alt="Family" onclick="openFullscreen(this)">
+    </div>
+
+    <!-- Guiding text below the gallery -->
+    <p style="text-align: center; margin-top: 1em; font-style: italic; color: #555;">
+      Click on any picture to enlarge it.
+    </p>
+  </section>
+
+  <div class="fullscreen-img" id="fullscreen">
+    <img src="" alt="Expanded view" id="fullscreen-img">
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Miska Braun</p>
+  </footer>
+
+  <script>
+    function openFullscreen(img) {
+      const fs = document.getElementById("fullscreen");
+      const fsImg = document.getElementById("fullscreen-img");
+      fsImg.src = img.src;
+      fs.classList.add("active");
+    }
+
+    document.getElementById("fullscreen").addEventListener("click", function () {
+      this.classList.remove("active");
+      document.getElementById("fullscreen-img").src = "";
+    });
+  </script>
+</body>
+</html>

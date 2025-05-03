@@ -1,12 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MiskaB</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/website.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Explore the personal and professional portfolio of Miska Braun." />
+  <meta name="author" content="Miska Braun" />
+  <title>Home - Miska Braun</title>
+  <style>
+    /* Background Image Layer */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url("images/AI_2025_sky.png") no-repeat center center;
+      background-size: cover;
+      opacity: 0.82;
+      z-index: -1;
+      filter: grayscale(70%) blur(0.1px);
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #f1f1f1;
+      color: #2a2a2a;
+    }
+
+    /* Left-hand vertical nav */
+    nav {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 0 10px 10px 0;
+      padding: 1em 0.5em;
+      backdrop-filter: blur(5px);
+      transition: background 0.3s;
+    }
+
+    nav:hover {
+      background: rgba(0, 0, 0, 0.85);
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      align-items: center;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      transition: all 0.3s ease;
+      font-size: 1.85rem;
+    }
+
+    nav ul li a:hover {
+      color: #ffd700;
+      font-size: 1.95rem;
+      transform: rotate(180deg) scale(1.00);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        top: unset;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        transform: none;
+        border-radius: 10px 10px 0 0;
+        padding: 0.5em;
+      }
+
+      nav ul {
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+      nav ul li a {
+        writing-mode: horizontal-tb;
+        transform: none;
+        font-size: 0.9rem;
+      }
+
+      nav ul li a:hover {
+        transform: scale(1.15);
+      }
+    }
+
+    .flying-images {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .flying-images img {
+      position: absolute;
+      width: 32vw;
+      height: auto;
+      opacity: 0;
+      animation: fly-in 2.5s ease-out forwards;
+      transition: transform 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
+    }
+
+    @keyframes fly-in {
+      0% {
+        transform: translate(var(--start-x), -250px) scale(0.9) rotate(-15deg);
+        opacity: 0;
+      }
+      100% {
+        transform: translate(var(--final-x), var(--final-y)) scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    section {
+      padding: 2em;
+      max-width: 900px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #222;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.5em;
+    }
+
+    img {
+      max-width: 100%;
+      margin: 1em 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2em;
+      background-color: rgba(240, 240, 240, 0.9);
+      margin-top: 2em;
+      border-top: 1px solid #ccc;
+    }
+
+    a {
+      color: #2255aa;
+      font-weight: bold;
+    }
+
+    a:hover {
+      color: #113377;
+    }
+
+    .scroll-down {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2em;
+      color: #04040d;
+      text-align: center;
+      animation: bounce 1.5s infinite;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .scroll-down span {
+      display: block;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+
+    .scroll-down:hover {
+      color: #ffd700;
+      transform: translateX(-50%) scale(1.1);
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+    }
+
+    section#about {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    section#about img {
+      width: 40%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    section#about p {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left-hand Vertical Navigation -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="freetime.html">Freetime</a></li>
+      <li><a href="cv.html">CV/Professional</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="flying-images">
+    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Profile_2025.jpeg" alt="1" />
+    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/AWS_Sum_2024.jpeg" alt="2" />
+    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/GH_Uni_2024_2.jpeg" alt="3" />
+    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Copilot_WS_2024.jpeg" alt="4" />
+    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Crayon_2019.jpeg" alt="5" />
+    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/miska_2019_crayon.jpeg" alt="6" />
+    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/icehockey.jpg" alt="7" />
+    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/travel.jpg" alt="8" />
+    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/GH_Uni_2023.jpeg" alt="9" />
+    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/car.jpg" alt="10" />
+    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/th.jpeg" alt="11" />
+    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/profile2.jpeg" alt="12" />
+  </div>
+
+  <section id="about">
+    <img src="images/profile2.jpeg" alt="Alternate Profile Picture" />
+    <p>
+      👋 Hello! I’m <strong>Miska Braun</strong> — a technology enthusiast with a passion for 🌩️ cloud innovation, 🌱 sustainability, and 🌍 connecting with people across borders and cultures.
+      <br /><br />
+      This website — or my <em>online wall</em> — is a personal portfolio showcasing my professional journey, interests, and growth. Head over to the <strong>CV/Professional</strong> section to dive deeper into my background and experience.
+      <br /><br />
+      I strongly believe in the power of combining technology 🤖 with people 🧑‍🤝‍🧑 to make a real difference. 
+      <br />
+      In the <strong>Freetime</strong> section, you’ll find things that matter to me — some tech-driven, some purely human, and all driven by ❤️ passion and time.
+      <br /><br />
+      Want to get in touch? Reach out via <a href="https://www.linkedin.com/in/miskabraun/" target="_blank">LinkedIn</a> — I’d love to connect!
+      <br /><br />
+      "Cut the crap and land that fucking plane!" — <em>Captain Sully</em>
+    </p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Miska Braun</p>
+  </footer>
+
+  <div class="scroll-down">
+    ↓
+    <span>Scroll Down</span>
+  </div>
+
+  <script>
+    const images = document.querySelectorAll('.flying-images img');
+    const container = document.querySelector('.flying-images');
+    const containerWidth = container.clientWidth;
+    const containerHeight = container.clientHeight;
+
+    const paddingX = containerWidth * 0.05;
+    const paddingY = containerHeight * 0.05;
+
+    const spots = [
+      [paddingX, paddingY],
+      [containerWidth / 2 - 16 * window.innerWidth / 100, paddingY],
+      [containerWidth - paddingX - 32 * window.innerWidth / 100, paddingY],
+      [paddingX, containerHeight / 2 + paddingY],
+      [containerWidth / 2 - 16 * window.innerWidth / 100, containerHeight / 2 + paddingY],
+      [containerWidth - paddingX - 32 * window.innerWidth / 100, containerHeight / 2 + paddingY]
+    ];
+
+    const shuffled = Array.from(images).sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, 6);
+    const unselected = shuffled.slice(6);
+    unselected.forEach(img => img.style.display = 'none');
+
+    selected.forEach((img, i) => {
+      const [baseX, baseY] = spots[i];
+      const offsetX = (Math.random() - 0.5) * 30;
+      const offsetY = (Math.random() - 0.5) * 30;
+      const finalX = baseX + offsetX;
+      const finalY = baseY + offsetY;
+      const startX = Math.random() * containerWidth;
+
+      img.style.setProperty('--start-x', `${startX}px`);
+      img.style.setProperty('--final-x', `${finalX}px`);
+      img.style.setProperty('--final-y', `${finalY}px`);
+      img.style.animationDelay = `${i * 0.25}s`;
+    });
+
+    document.querySelector('.scroll-down').addEventListener('mouseover', () => {
+      document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+
+</body>
 </html>
