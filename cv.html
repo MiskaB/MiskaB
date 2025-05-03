@@ -9,6 +9,7 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    /* Fixed Background Layer */
     body::before {
       content: "";
       position: fixed;
@@ -16,7 +17,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: url("https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/AI_2025_sky.png") no-repeat center center fixed;
+      background: url("images/AI_2025_sky.png") no-repeat center center fixed;
       background-size: cover;
       opacity: 0.82;
       z-index: -1;
@@ -33,6 +34,7 @@
       background-color: #111;
     }
 
+    /* Vertical Navigation */
     nav {
       position: fixed;
       top: 50%;
@@ -172,6 +174,7 @@
       border-radius: 5px;
     }
 
+    /* Timeline Dots */
     .timeline-dots {
       position: fixed;
       right: 20px;
@@ -184,8 +187,8 @@
     }
 
     .timeline-dots a {
-      width: 14px;
-      height: 14px;
+      width: 20px;
+      height: 20px;
       background: #888;
       border-radius: 50%;
       display: block;
@@ -196,53 +199,11 @@
     .timeline-dots a.active {
       background: #ffd700;
     }
-
-    .scroll-arrow {
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 2em;
-      color: #04040d;
-      text-align: center;
-      font-weight: bold;
-      cursor: pointer;
-      z-index: 1001;
-    }
-
-    .scroll-arrow span {
-      display: block;
-      font-size: 0.9em;
-      margin-top: 5px;
-    }
-
-    .scroll-arrow:hover {
-      color: #ffd700;
-      transform: translateX(-50%) scale(1.1);
-    }
-
-    #scroll-down {
-      bottom: 20px;
-      animation: bounce 1.5s infinite;
-    }
-
-    #go-up {
-      top: 20px;
-      display: none;
-    }
-
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateX(-50%) translateY(0);
-      }
-      50% {
-        transform: translateX(-50%) translateY(-10px);
-      }
-    }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- Left Vertical Navigation -->
   <nav>
     <ul>
       <li><a href="index.html">Home</a></li>
@@ -259,47 +220,118 @@
     <a href="#pedibm" id="dot-3"></a>
   </div>
 
-  <!-- Sections -->
+  <!-- Eficode Section -->
   <section id="eficode">
     <div class="company-info">
-      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Eficode_logo.png" alt="Eficode" class="company-logo">
+      <img src="images/Eficode_logo.png" alt="Eficode" class="company-logo">
       <h2>Eficode</h2>
     </div>
+    <div class="roles">
+      <div class="role">
+        <h3>Cloud Partner Lead</h3>
+        <p><strong>Sep 2024 – Present</strong> | Amsterdam, Netherlands</p>
+        <p>Partnering with AWS, Microsoft, GitHub, and Google to drive cloud innovation across 10 countries.</p>
+        <div class="skills">
+          <h4>Skills</h4>
+          <ul><li>DevOps</li><li>Strategic Partnership</li><li>Executive Stakeholder Management</li></ul>
+          <h4>Technologies</h4>
+          <ul><li>Microsoft</li><li>GitHub </li><li>AWS</li></ul>
+        </div>
+      </div>
+      <div class="role">
+        <h3>Cloud Partner Lead</h3>
+        <p><strong>Feb 2022 – Sep 2024</strong> | Helsinki, Finland</p>
+        <p>Established strong cloud ecosystem partnerships and scaled DevOps practices.</p>
+        <div class="skills">
+          <h4>Skills</h4>
+          <ul><li>Partner Relationship Building</li><li>Solution Selling</li><li>Practice leading</li></ul>
+          <h4>Technologies</h4>
+          <ul><li>Microsoft</li><li>AWS</li><li>Google</li></ul>
+        </div>
+      </div>
+    </div>
   </section>
 
+  <!-- Crayon Section -->
   <section id="crayon">
     <div class="company-info">
-      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Craoyn_logo.png" alt="Crayon" class="company-logo">
+      <img src="images/Craoyn_logo.png" alt="Crayon" class="company-logo">
       <h2>Crayon</h2>
     </div>
-  </section>
-
-  <section id="pedibm">
-    <div class="company-info">
-      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Pedab_logo.png" alt="Pedab" class="company-logo">
-      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/IBM_logo.png" alt="IBM" class="company-logo">
-      <h2>Pedab + IBM</h2>
+    <div class="roles">
+      <div class="role">
+        <h3>Cloud Transformation Services Lead</h3>
+        <p><strong>Sep 2018 – Feb 2022</strong> | Helsinki, Finland</p>
+        <p>Accelerated enterprise public cloud adoption.</p>
+        <div class="skills">
+          <h4>Skills</h4>
+          <ul><li>Cloud Transformation</li><li>Solution Architecture</li><li>Customer Success</li></ul>
+          <h4>Technologies</h4>
+          <ul><li>AWS</li><li>Microsoft Azure</li><li>GCP</li></ul>
+        </div>
+      </div>
+      <div class="role">
+        <h3>Business Development Manager</h3>
+        <p><strong>Jul 2016 – Sep 2018</strong> | Helsinki, Finland</p>
+        <p>Developed vendor services and strategic partnerships.</p>
+        <div class="skills">
+          <h4>Skills</h4>
+          <ul><li>Partner Management</li><li>Service Design</li><li>Training</li></ul>
+          <h4>Technologies</h4>
+          <ul><li>IBM Licensing</li><li>Microsoft Azure</li></ul>
+        </div>
+      </div>
+      <div class="role">
+        <h3>SAM Consultant</h3>
+        <p><strong>Apr 2014 – Jul 2016</strong> | Helsinki, Finland</p>
+        <p>Delivered SAM processes with IBM tools.</p>
+        <div class="skills">
+          <h4>Skills</h4>
+          <ul><li>Software Asset Management</li><li>License Compliance</li><li>Audits</li></ul>
+          <h4>Technologies</h4>
+          <ul><li>IBM Cognos</li><li>Flexera</li></ul>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Scroll Down Arrow -->
-  <div class="scroll-arrow" id="scroll-down">
-    ↓
-    <span>Scroll Down</span>
-  </div>
+  <!-- Pedab & IBM Section -->
+  <section id="pedibm">
+    <div class="company-info">
+      <img src="images/Pedab_logo.png" alt="Pedab" class="company-logo">
+      <img src="images/IBM_logo.png" alt="IBM" class="company-logo">
+      <h2>Pedab + IBM</h2>
+    </div>
+    <div class="roles">
+      <div class="role">
+        <h3>Sales & Partner Business Developer - Pedab</h3>
+        <p><strong>Aug 2011 – Mar 2014</strong> | Finland</p>
+        <p>Recruited and developed partner channel for IBM distribution.</p>
+        <div class="skills">
+          <h4>Skills</h4>
+          <ul><li>Partner Recruitment</li><li>Sales Enablement</li><li>Channel Development</li></ul>
+          <h4>Technologies</h4>
+          <ul><li>Lotus Notes</li><li>IBM Cognos</li></ul>
+        </div>
+      </div>
+      <div class="role">
+        <h3>Software Sales Specialist - IBM</h3>
+        <p><strong>Jun 2010 – Aug 2011</strong> | Ireland</p>
+        <p>Closed SaaS licensing deals and negotiated enterprise contracts.</p>
+        <div class="skills">
+          <h4>Skills</h4>
+          <ul><li>Solution Sales</li><li>Contract Negotiation</li><li>Quota Attainment</li></ul>
+          <h4>Technologies</h4>
+          <ul><li>IBM</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Go Up Arrow -->
-  <div class="scroll-arrow" id="go-up">
-    ↑
-    <span>Go Up</span>
-  </div>
-
-  <!-- JS for Scroll Behavior -->
+  <!-- JavaScript: Visibility observer for fade-in & timeline -->
   <script>
     const sections = document.querySelectorAll('section');
     const dots = document.querySelectorAll('.timeline-dots a');
-    const scrollDown = document.getElementById('scroll-down');
-    const goUp = document.getElementById('go-up');
 
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -314,23 +346,6 @@
     }, { threshold: 0.6 });
 
     sections.forEach(sec => observer.observe(sec));
-
-    scrollDown.addEventListener('mouseenter', () => {
-      const first = document.querySelector('section');
-      if (first) first.scrollIntoView({ behavior: 'smooth' });
-    });
-
-    goUp.addEventListener('mouseenter', () => {
-      document.body.scrollIntoView({ behavior: 'smooth' });
-    });
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        goUp.style.display = 'block';
-      } else {
-        goUp.style.display = 'none';
-      }
-    });
   </script>
 
 </body>
