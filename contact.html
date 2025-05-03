@@ -15,7 +15,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: url("images/AI_2025_sky.png") no-repeat center center;
+      background: url("https://raw.githubusercontent.com/miskab/MiskaB/main/images/AI_2025_sky.png") no-repeat center center;
       background-size: cover;
       opacity: 0.82;
       z-index: -1;
@@ -167,39 +167,6 @@
     a:hover {
       color: #113377;
     }
-
-    .scroll-down {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 2em;
-      color: #04040d;
-      text-align: center;
-      animation: bounce 1.5s infinite;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .scroll-down span {
-      display: block;
-      font-size: 0.9em;
-      margin-top: 5px;
-    }
-
-    .scroll-down:hover {
-      color: #f7f71b;
-      transform: translateX(-50%) scale(1.1);
-    }
-
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateX(-50%) translateY(0);
-      }
-      50% {
-        transform: translateX(-50%) translateY(-10px);
-      }
-    }
   </style>
 </head>
 <body>
@@ -234,11 +201,6 @@
   <footer>
     <p>&copy; 2025 Miska Braun</p>
   </footer>
-
-  <div class="scroll-down" onclick="document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });">
-    ↓
-    <span>Scroll Down</span>
-  </div>
 
 </body>
 </html>
