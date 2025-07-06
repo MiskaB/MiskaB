@@ -1,4 +1,4 @@
-## Hi there 👋 and welcome to my personal portfolio and homepage! 
+## Hi there 👋 & welcome to my personal portfolio and homepage! 
 
 Feel free to check out in graphical version here [Miska Braun's](https://miskab.github.io/MiskaB/) main site, showcasing my professional journey, interests, and projects along with some pictures.
 
