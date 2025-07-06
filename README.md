@@ -1,10 +1,14 @@
-## Hi there 👋 & welcome to my personal portfolio and homepage! 
+## Hi, I'm Miska Braun — welcome to my digital home
 
 Feel free to check out in graphical version here [Miska Braun's](https://miskab.github.io/MiskaB/) main site, showcasing my professional journey, interests, and projects along with some pictures.
 
-I´m always interested in connecting with fellow technology geeks and other like minded people.
+I´m always interested in connecting with fellow like minded people. Currently exploring possibilities of AI and learning new things.
 
-Currently exploring possibilities of AI and learning new things.
+I’m passionate about empowering environments, wiht fast, clean, and scalable digital things:
+- Automation & infrastructure
+- Learning & experimentation
+- Remote-first, freedom-oriented mentality
+- Yesterday was a good day to start
 
 
 
