@@ -153,4 +153,48 @@ nav {
 
 ---
 
+## 🧪 Testing & Quality Assurance
+
+This project uses open source tools for automated testing and quality checks:
+
+- **Unit Testing (Jest):** For JavaScript logic (move reusable code to .js files for best results).
+- **End-to-End Testing (Playwright):** Simulates real user interactions and checks navigation/UI.
+- **Accessibility Testing (axe-core):** Checks for critical accessibility issues in all main HTML files.
+
+### 📂 Test Structure
+
+```
+tests/
+  unit/              # Unit tests for JS logic (add .js files for best results)
+  e2e/               # Playwright E2E tests
+  accessibility/     # Accessibility tests
+```
+
+### 🚀 How to Run Tests
+
+1. **Start a local server** (for E2E tests):
+   ```sh
+   python3 -m http.server 8000
+   ```
+2. **Run all tests:**
+   ```sh
+   npm test
+   ```
+   Or run individual suites:
+   ```sh
+   npm run test:unit           # Unit tests (Jest)
+   npm run test:e2e            # E2E tests (Playwright)
+   npm run test:html           # HTML validation
+   npm run test:accessibility  # Accessibility checks
+   ```
+
+### 🏆 Best Practices
+- Move JavaScript logic from HTML into .js files for better testability.
+- Keep tests in the `tests/` folder, organized by type.
+- Run tests regularly, especially before pushing to GitHub.
+- Review and fix any accessibility or HTML errors promptly.
+- Extend E2E tests as your site grows (e.g., test forms, navigation, image galleries).
+
+---
+
 Feel free to reach out or fork this project for your own use!

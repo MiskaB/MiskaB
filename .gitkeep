@@ -1,0 +1,9 @@
+tests/
+  unit/
+    placeholder.md  # Instructions for unit testing JS (move logic to .js files for best results)
+  e2e/
+    homepage.spec.js  # Playwright E2E test
+  html/
+    validate-html.test.js  # HTML validation test
+  accessibility/
+    accessibility.test.js  # Accessibility test with axe-core

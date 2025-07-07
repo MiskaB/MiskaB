@@ -1,0 +1,32 @@
+{
+  "name": "miskab",
+  "version": "1.0.0",
+  "description": "Feel free to check out in graphical version here [Miska Braun's](https://miskab.github.io/MiskaB/) main site, showcasing my professional journey, interests, and projects along with some pictures.",
+  "main": "index.js",
+  "scripts": {
+    "test:unit": "jest tests/unit",
+    "test:e2e": "npx playwright test tests/e2e",
+    "test:html": "jest tests/html/validate-html.test.js",
+    "test:accessibility": "jest tests/accessibility/accessibility.test.js",
+    "test": "npm run test:unit && npm run test:html && npm run test:accessibility && npm run test:e2e"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiskaB/MiskaB.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MiskaB/MiskaB/issues"
+  },
+  "homepage": "https://github.com/MiskaB/MiskaB#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.53.2",
+    "axe-core": "^4.10.3",
+    "html-validator": "^6.0.1",
+    "jest": "^28.1.3",
+    "jsdom": "^26.1.0",
+    "playwright": "^1.53.2"
+  }
+}

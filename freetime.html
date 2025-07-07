@@ -230,25 +230,13 @@
   </section>
 
   <div class="fullscreen-img" id="fullscreen">
-    <img src="" alt="Expanded view" id="fullscreen-img">
+    <img src="images/icehockey.jpg" alt="Expanded view" id="fullscreen-img">
   </div>
 
   <footer>
     <p>&copy; 2025 Miska Braun</p>
   </footer>
 
-  <script>
-    function openFullscreen(img) {
-      const fs = document.getElementById("fullscreen");
-      const fsImg = document.getElementById("fullscreen-img");
-      fsImg.src = img.src;
-      fs.classList.add("active");
-    }
-
-    document.getElementById("fullscreen").addEventListener("click", function () {
-      this.classList.remove("active");
-      document.getElementById("fullscreen-img").src = "";
-    });
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>
