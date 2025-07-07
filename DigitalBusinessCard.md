@@ -124,6 +124,40 @@ nav {
 
 - **Tip**: The navigation is easy to extend—just add new `<li><a href="..."></a></li>` items.
 
+### 4. Immersive Mouse-Following Gradient Overlay (All Pages)
+
+- **Purpose**: Adds a modern, interactive glow that follows the mouse cursor, creating a sense of depth and immersion on every page.
+- **How**: Uses a CSS `body::after` overlay with a radial gradient, and JavaScript to update CSS variables (`--mouse-x`, `--mouse-y`) on mouse movement.
+
+```css
+body {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  position: relative;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(0,255,180,0.18), transparent 60%);
+  mix-blend-mode: lighten;
+  transition: background 0.15s;
+}
+```
+
+```js
+document.addEventListener("mousemove", (e) => {
+  const x = (e.clientX / window.innerWidth) * 100 + "%";
+  const y = (e.clientY / window.innerHeight) * 100 + "%";
+  document.body.style.setProperty("--mouse-x", x);
+  document.body.style.setProperty("--mouse-y", y);
+});
+```
+
+- **Tip**: Change the gradient color (e.g., `rgba(0,255,180,0.18)`) or blend mode for different moods. This effect is lightweight and works on all static pages.
+
 ---
 
 ## 📝 How to Reuse or Extend

@@ -29,6 +29,19 @@
       line-height: 1.6;
       background-color: #f1f1f1;
       color: #2a2a2a;
+      --mouse-x: 50%;
+      --mouse-y: 50%;
+      position: relative;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(237, 237, 12, 0.193), transparent 60%);
+      mix-blend-mode: lighten;
+      transition: background 0.15s;
     }
 
     /* Left-hand vertical nav */
@@ -313,6 +326,13 @@
 
     document.querySelector('.scroll-down').addEventListener('mouseover', () => {
       document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      const x = (e.clientX / window.innerWidth) * 100 + "%";
+      const y = (e.clientY / window.innerHeight) * 100 + "%";
+      document.body.style.setProperty("--mouse-x", x);
+      document.body.style.setProperty("--mouse-y", y);
     });
   </script>
 
