@@ -102,70 +102,68 @@
       }
     }
 
-    section {
-      padding: 2em;
-      max-width: 900px;
-      margin: 6em auto 2em auto;
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 10px;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-      color: #222;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 0.5em;
-    }
-
-    form {
+    section#contact {
+      padding: 0;
+      margin: 0;
+      background: none;
+      box-shadow: none;
+      border-radius: 0;
       display: flex;
-      flex-direction: column;
-      gap: 1em;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding-left: 8vw;
+      padding-right: 0;
     }
 
-    label {
-      font-weight: bold;
-    }
-
-    input, textarea {
-      padding: 0.75em;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1em;
+    .contact-form {
+      background: rgba(255,255,255,0.7);
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 2em 2.5em;
+      max-width: 340px;
       width: 100%;
+      margin: 0;
+      backdrop-filter: blur(4px);
     }
-
-    button {
-      background-color: #2255aa;
-      color: white;
-      padding: 0.75em 1.5em;
+    .contact-form h2 {
+      margin-top: 0;
+      font-size: 1.3em;
+      color: #222;
+      text-align: center;
+      font-weight: 600;
+    }
+    .contact-form label {
+      display: block;
+      margin: 1em 0 0.2em 0;
+      font-size: 0.95em;
+      color: #333;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.5em;
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.6);
+      font-size: 1em;
+      margin-bottom: 0.7em;
+      resize: vertical;
+    }
+    .contact-form button {
+      width: 100%;
+      padding: 0.7em;
       border: none;
       border-radius: 6px;
+      background: #0077ccbb;
+      color: #fff;
       font-size: 1em;
+      font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: background 0.2s;
     }
-
-    button:hover {
-      background-color: #113377;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2em;
-      background-color: rgba(240, 240, 240, 0.9);
-      margin-top: 2em;
-      border-top: 1px solid #ccc;
-    }
-
-    a {
-      color: #2255aa;
-      font-weight: bold;
-    }
-
-    a:hover {
-      color: #113377;
+    .contact-form button:hover {
+      background: #005fa3cc;
     }
   </style>
 </head>
@@ -182,17 +180,16 @@
   </nav>
 
   <section id="contact">
-    <h2>Contact</h2>
-    <p>If you'd like to get in touch with me, feel free to use the form below or connect via <a href="https://www.linkedin.com/in/miskabraun/" target="_blank">LinkedIn</a>.</p>
-    <form action="mailto:miskabraun@gmail.com" method="post" enctype="text/plain">
+    <form class="contact-form" action="mailto:miskabraun@gmail.com" method="post" enctype="text/plain">
+      <h2>Contact Miska</h2>
       <label for="name">Name</label>
-      <input type="text" id="name" name="name" required />
+      <input id="name" name="name" type="text" autocomplete="name" required />
 
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" required />
+      <input id="email" name="email" type="email" autocomplete="email" required />
 
       <label for="message">Message</label>
-      <textarea id="message" name="message" rows="6" required></textarea>
+      <textarea id="message" name="message" rows="3" required></textarea>
 
       <button type="submit">Send</button>
     </form>
