@@ -44,13 +44,26 @@
       transition: background 0.15s;
     }
     
-    /* Dedicated snap container */
+    /* Dedicated snap container - gentler snap behavior */
     .snap-container {
       height: 100vh;
       overflow-y: scroll;
-      scroll-snap-type: y mandatory;
+      scroll-snap-type: y proximity; /* Changed from mandatory to proximity for gentler snapping */
       scroll-behavior: smooth;
       scroll-padding-top: 50px; /* Account for fixed navigation */
+    }
+    
+    /* More responsive snap on desktop, gentler on mobile */
+    @media (min-width: 769px) {
+      .snap-container {
+        scroll-snap-type: y proximity;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .snap-container {
+        scroll-snap-type: y proximity; /* Even gentler on mobile */
+      }
     }
     
     /* Vertical Navigation */
@@ -379,18 +392,72 @@
 
     sections.forEach(sec => observer.observe(sec));
 
-    // Fallback JavaScript for consistent snap behavior
+    // Gentler snap behavior - only trigger after user stops scrolling
     let timeout;
+    let isUserScrolling = false;
+    let touchStartTime = 0;
+
+    // Detect when user starts scrolling/touching
+    container.addEventListener('touchstart', () => {
+      isUserScrolling = true;
+      touchStartTime = Date.now();
+      clearTimeout(timeout);
+    });
+
+    container.addEventListener('touchmove', () => {
+      isUserScrolling = true;
+      clearTimeout(timeout);
+    });
+
+    container.addEventListener('touchend', () => {
+      // Only allow snapping if touch was brief (not a long press/hold)
+      const touchDuration = Date.now() - touchStartTime;
+      if (touchDuration < 1000) { // Less than 1 second touch
+        setTimeout(() => {
+          isUserScrolling = false;
+        }, 150);
+      } else {
+        isUserScrolling = false;
+      }
+    });
+
+    // Mouse scrolling detection
+    container.addEventListener('wheel', () => {
+      isUserScrolling = true;
+      clearTimeout(timeout);
+      setTimeout(() => {
+        isUserScrolling = false;
+      }, 100);
+    });
+
+    // Gentler snap with longer delay and only when not actively scrolling
     container.addEventListener('scroll', () => {
       clearTimeout(timeout);
+      
+      // Only snap if user isn't actively scrolling and after a longer delay
       timeout = setTimeout(() => {
-        const sections = Array.from(document.querySelectorAll('section'));
-        const target = sections.reduce((closest, section) => {
-          return Math.abs(section.getBoundingClientRect().top) <
-                 Math.abs(closest.getBoundingClientRect().top) ? section : closest;
-        });
-        target.scrollIntoView({behavior: 'smooth'});
-      }, 100);
+        if (!isUserScrolling) {
+          const sections = Array.from(document.querySelectorAll('section'));
+          const containerRect = container.getBoundingClientRect();
+          
+          // Find the section closest to center of viewport for gentler snapping
+          const target = sections.reduce((closest, section) => {
+            const sectionRect = section.getBoundingClientRect();
+            const sectionCenter = sectionRect.top + (sectionRect.height / 2);
+            const viewportCenter = containerRect.height / 2;
+            
+            const closestCenter = closest.getBoundingClientRect().top + (closest.getBoundingClientRect().height / 2);
+            
+            return Math.abs(sectionCenter - viewportCenter) < Math.abs(closestCenter - viewportCenter) ? section : closest;
+          });
+          
+          // Only snap if section is reasonably close (not forcing aggressive snapping)
+          const targetRect = target.getBoundingClientRect();
+          if (Math.abs(targetRect.top) > 100) { // Only snap if not already well-positioned
+            target.scrollIntoView({behavior: 'smooth', block: 'start'});
+          }
+        }
+      }, 300); // Increased delay from 100ms to 300ms for gentler behavior
     });
 
     // Mouse following gradient
