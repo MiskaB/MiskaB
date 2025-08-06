@@ -26,9 +26,6 @@
     body {
       font-family: Arial, sans-serif;
       color: #f0f0f0;
-      scroll-snap-type: y mandatory;
-      overflow-y: scroll;
-      height: 100vh;
       position: relative;
       background-color: #111;
       --mouse-x: 50%;
@@ -40,9 +37,23 @@
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(105, 7, 242, 0.18), transparent 60%);
+      background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(0,255,180,0.18), transparent 60%);
       mix-blend-mode: lighten;
       transition: background 0.15s;
+    }
+    
+    @media (min-width: 769px) {
+      body {
+        scroll-snap-type: y mandatory;
+        overflow-y: scroll;
+        height: 100vh;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        scroll-snap-type: none;
+      }
     }
 
     /* Vertical Navigation */
@@ -122,23 +133,38 @@
 }
 
     section {
-  min-height: 100vh;
-  scroll-snap-align: start;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 3em 1em;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 1s ease;
-  gap: 1em;
-}
-
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 3em 1em;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+      gap: 1em;
+    }
+    
     section.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+    
+    @media (min-width: 769px) {
+      section {
+        min-height: 100vh;
+        scroll-snap-align: start;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      section {
+        min-height: auto;
+        padding: 2em 1em;
+      }
+      .timeline-dots {
+        display: none;
+      }
     }
 
     .company-logo {
@@ -351,6 +377,11 @@
     const sections = document.querySelectorAll('section');
     const dots = document.querySelectorAll('.timeline-dots a');
 
+    // Make all sections visible immediately on page load
+    sections.forEach(section => {
+      section.classList.add('visible');
+    });
+
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -361,7 +392,7 @@
           });
         }
       });
-    }, { threshold: 0.6 });
+    }, { threshold: 0.1 });
 
     sections.forEach(sec => observer.observe(sec));
 
