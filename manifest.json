@@ -1,0 +1,37 @@
+{
+  "name": "Miska Braun Portfolio",
+  "short_name": "Miska Braun",
+  "description": "Personal and professional portfolio of Miska Braun showcasing cloud innovation expertise, interests, and projects",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#ffd700",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "images/AppleTouchIcon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "images/AppleTouchIcon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/AppleTouchIcon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["portfolio", "business", "professional"],
+  "screenshots": [
+    {
+      "src": "images/Profile_2025.jpeg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide"
+    }
+  ]
+}
