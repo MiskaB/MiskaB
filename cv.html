@@ -30,6 +30,8 @@
       background-color: #111;
       --mouse-x: 50%;
       --mouse-y: 50%;
+      margin: 0;
+      padding: 0;
     }
     body::after {
       content: "";
@@ -42,20 +44,15 @@
       transition: background 0.15s;
     }
     
-    @media (min-width: 769px) {
-      body {
-        scroll-snap-type: y mandatory;
-        overflow-y: scroll;
-        height: 100vh;
-      }
+    /* Dedicated snap container */
+    .snap-container {
+      height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      scroll-padding-top: 50px; /* Account for fixed navigation */
     }
     
-    @media (max-width: 768px) {
-      body {
-        scroll-snap-type: none;
-      }
-    }
-
     /* Vertical Navigation */
     nav {
       position: fixed;
@@ -133,37 +130,24 @@
 }
 
     section {
+      min-height: 100vh;
+      scroll-snap-align: start;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-around;
       flex-wrap: wrap;
       padding: 3em 1em;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s ease;
-      gap: 1em;
-    }
-    
-    section.visible {
       opacity: 1;
       transform: translateY(0);
-    }
-    
-    @media (min-width: 769px) {
-      section {
-        min-height: 100vh;
-        scroll-snap-align: start;
-      }
+      gap: 1em;
     }
     
     @media (max-width: 768px) {
       section {
-        min-height: auto;
+        flex-direction: column;
+        align-items: flex-start;
         padding: 2em 1em;
-      }
-      .timeline-dots {
-        display: none;
       }
     }
 
@@ -264,128 +248,127 @@
     <a href="#pedibm" id="dot-3"></a>
   </div>
 
-  <!-- Eficode Section -->
-  <section id="eficode">
-    <div class="company-info">
-      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Eficode_logo.png" alt="Eficode" class="company-logo">
-      <h2>Eficode</h2>
-    </div>
-    <div class="roles">
-      <div class="role">
-        <h3>Cloud Partner Lead</h3>
-        <p><strong>Sep 2024 – Present</strong> | Amsterdam, Netherlands</p>
-        <p>Partnering with AWS, Microsoft, GitHub, and Google to drive cloud innovation across 10 countries.</p>
-        <div class="skills">
-          <h4>Skills</h4>
-          <ul><li>DevOps</li><li>Strategic Partnership</li><li>Executive Stakeholder Management</li></ul>
-          <h4>Technologies</h4>
-          <ul><li>Microsoft</li><li>GitHub </li><li>AWS</li></ul>
+  <!-- Dedicated Snap Container -->
+  <main class="snap-container">
+    <!-- Eficode Section -->
+    <section id="eficode">
+      <div class="company-info">
+        <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Eficode_logo.png" alt="Eficode" class="company-logo">
+        <h2>Eficode</h2>
+      </div>
+      <div class="roles">
+        <div class="role">
+          <h3>Cloud Partner Lead</h3>
+          <p><strong>Sep 2024 – Present</strong> | Amsterdam, Netherlands</p>
+          <p>Partnering with AWS, Microsoft, GitHub, and Google to drive cloud innovation across 10 countries.</p>
+          <div class="skills">
+            <h4>Skills</h4>
+            <ul><li>DevOps</li><li>Strategic Partnership</li><li>Executive Stakeholder Management</li></ul>
+            <h4>Technologies</h4>
+            <ul><li>Microsoft</li><li>GitHub </li><li>AWS</li></ul>
+          </div>
+        </div>
+        <div class="role">
+          <h3>Cloud Partner Lead</h3>
+          <p><strong>Feb 2022 – Sep 2024</strong> | Helsinki, Finland</p>
+          <p>Established strong cloud ecosystem partnerships and scaled DevOps practices.</p>
+          <div class="skills">
+            <h4>Skills</h4>
+            <ul><li>Partner Relationship Building</li><li>Solution Selling</li><li>Practice leading</li></ul>
+            <h4>Technologies</h4>
+            <ul><li>Microsoft</li><li>AWS</li><li>Google</li></ul>
+          </div>
         </div>
       </div>
-      <div class="role">
-        <h3>Cloud Partner Lead</h3>
-        <p><strong>Feb 2022 – Sep 2024</strong> | Helsinki, Finland</p>
-        <p>Established strong cloud ecosystem partnerships and scaled DevOps practices.</p>
-        <div class="skills">
-          <h4>Skills</h4>
-          <ul><li>Partner Relationship Building</li><li>Solution Selling</li><li>Practice leading</li></ul>
-          <h4>Technologies</h4>
-          <ul><li>Microsoft</li><li>AWS</li><li>Google</li></ul>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Crayon Section -->
-  <section id="crayon">
-    <div class="company-info">
-      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Craoyn_logo.png" alt="Crayon" class="company-logo">
-      <h2>Crayon</h2>
-    </div>
-    <div class="roles">
-      <div class="role">
-        <h3>Cloud Transformation Services Lead</h3>
-        <p><strong>Sep 2018 – Feb 2022</strong> | Helsinki, Finland</p>
-        <p>Accelerated enterprise public cloud adoption.</p>
-        <div class="skills">
-          <h4>Skills</h4>
-          <ul><li>Cloud Transformation</li><li>Solution Architecture</li><li>Customer Success</li></ul>
-          <h4>Technologies</h4>
-          <ul><li>AWS</li><li>Microsoft Azure</li><li>GCP</li></ul>
+    <!-- Crayon Section -->
+    <section id="crayon">
+      <div class="company-info">
+        <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Craoyn_logo.png" alt="Crayon" class="company-logo">
+        <h2>Crayon</h2>
+      </div>
+      <div class="roles">
+        <div class="role">
+          <h3>Cloud Transformation Services Lead</h3>
+          <p><strong>Sep 2018 – Feb 2022</strong> | Helsinki, Finland</p>
+          <p>Accelerated enterprise public cloud adoption.</p>
+          <div class="skills">
+            <h4>Skills</h4>
+            <ul><li>Cloud Transformation</li><li>Solution Architecture</li><li>Customer Success</li></ul>
+            <h4>Technologies</h4>
+            <ul><li>AWS</li><li>Microsoft Azure</li><li>GCP</li></ul>
+          </div>
+        </div>
+        <div class="role">
+          <h3>Business Development Manager</h3>
+          <p><strong>Jul 2016 – Sep 2018</strong> | Helsinki, Finland</p>
+          <p>Developed vendor services and strategic partnerships.</p>
+          <div class="skills">
+            <h4>Skills</h4>
+            <ul><li>Partner Management</li><li>Service Design</li><li>Training</li></ul>
+            <h4>Technologies</h4>
+            <ul><li>IBM Licensing</li><li>Microsoft Azure</li></ul>
+          </div>
+        </div>
+        <div class="role">
+          <h3>SAM Consultant</h3>
+          <p><strong>Apr 2014 – Jul 2016</strong> | Helsinki, Finland</p>
+          <p>Delivered SAM processes with IBM tools.</p>
+          <div class="skills">
+            <h4>Skills</h4>
+            <ul><li>Software Asset Management</li><li>License Compliance</li><li>Audits</li></ul>
+            <h4>Technologies</h4>
+            <ul><li>IBM Cognos</li><li>Flexera</li></ul>
+          </div>
         </div>
       </div>
-      <div class="role">
-        <h3>Business Development Manager</h3>
-        <p><strong>Jul 2016 – Sep 2018</strong> | Helsinki, Finland</p>
-        <p>Developed vendor services and strategic partnerships.</p>
-        <div class="skills">
-          <h4>Skills</h4>
-          <ul><li>Partner Management</li><li>Service Design</li><li>Training</li></ul>
-          <h4>Technologies</h4>
-          <ul><li>IBM Licensing</li><li>Microsoft Azure</li></ul>
-        </div>
-      </div>
-      <div class="role">
-        <h3>SAM Consultant</h3>
-        <p><strong>Apr 2014 – Jul 2016</strong> | Helsinki, Finland</p>
-        <p>Delivered SAM processes with IBM tools.</p>
-        <div class="skills">
-          <h4>Skills</h4>
-          <ul><li>Software Asset Management</li><li>License Compliance</li><li>Audits</li></ul>
-          <h4>Technologies</h4>
-          <ul><li>IBM Cognos</li><li>Flexera</li></ul>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Pedab & IBM Section -->
-  <section id="pedibm">
-    <div class="company-info">
-      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Pedab_logo.png" alt="Pedab" class="company-logo">
-      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/IBM_logo.png" alt="IBM" class="company-logo">
-      <h2>Pedab + IBM</h2>
-    </div>
-    <div class="roles">
-      <div class="role">
-        <h3>Sales & Partner Business Developer - Pedab</h3>
-        <p><strong>Aug 2011 – Mar 2014</strong> | Finland</p>
-        <p>Recruited and developed partner channel for IBM distribution.</p>
-        <div class="skills">
-          <h4>Skills</h4>
-          <ul><li>Partner Recruitment</li><li>Sales Enablement</li><li>Channel Development</li></ul>
-          <h4>Technologies</h4>
-          <ul><li>Lotus Notes</li><li>IBM Cognos</li></ul>
+    <!-- Pedab & IBM Section -->
+    <section id="pedibm">
+      <div class="company-info">
+        <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Pedab_logo.png" alt="Pedab" class="company-logo">
+        <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/IBM_logo.png" alt="IBM" class="company-logo">
+        <h2>Pedab + IBM</h2>
+      </div>
+      <div class="roles">
+        <div class="role">
+          <h3>Sales & Partner Business Developer - Pedab</h3>
+          <p><strong>Aug 2011 – Mar 2014</strong> | Finland</p>
+          <p>Recruited and developed partner channel for IBM distribution.</p>
+          <div class="skills">
+            <h4>Skills</h4>
+            <ul><li>Partner Recruitment</li><li>Sales Enablement</li><li>Channel Development</li></ul>
+            <h4>Technologies</h4>
+            <ul><li>Lotus Notes</li><li>IBM Cognos</li></ul>
+          </div>
+        </div>
+        <div class="role">
+          <h3>Software Sales Specialist - IBM</h3>
+          <p><strong>Jun 2010 – Aug 2011</strong> | Ireland</p>
+          <p>Closed SaaS licensing deals and negotiated enterprise contracts.</p>
+          <div class="skills">
+            <h4>Skills</h4>
+            <ul><li>Solution Sales</li><li>Contract Negotiation</li><li>Quota Attainment</li></ul>
+            <h4>Technologies</h4>
+            <ul><li>IBM</li></ul>
+          </div>
         </div>
       </div>
-      <div class="role">
-        <h3>Software Sales Specialist - IBM</h3>
-        <p><strong>Jun 2010 – Aug 2011</strong> | Ireland</p>
-        <p>Closed SaaS licensing deals and negotiated enterprise contracts.</p>
-        <div class="skills">
-          <h4>Skills</h4>
-          <ul><li>Solution Sales</li><li>Contract Negotiation</li><li>Quota Attainment</li></ul>
-          <h4>Technologies</h4>
-          <ul><li>IBM</li></ul>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- JavaScript: Visibility observer for fade-in & timeline -->
   <script>
     const sections = document.querySelectorAll('section');
     const dots = document.querySelectorAll('.timeline-dots a');
+    const container = document.querySelector('.snap-container');
 
-    // Make all sections visible immediately on page load
-    sections.forEach(section => {
-      section.classList.add('visible');
-    });
-
+    // Intersection Observer for timeline dots
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
           const id = entry.target.id;
           dots.forEach(dot => {
             dot.classList.toggle('active', dot.getAttribute('href').includes(id));
@@ -396,6 +379,21 @@
 
     sections.forEach(sec => observer.observe(sec));
 
+    // Fallback JavaScript for consistent snap behavior
+    let timeout;
+    container.addEventListener('scroll', () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        const sections = Array.from(document.querySelectorAll('section'));
+        const target = sections.reduce((closest, section) => {
+          return Math.abs(section.getBoundingClientRect().top) <
+                 Math.abs(closest.getBoundingClientRect().top) ? section : closest;
+        });
+        target.scrollIntoView({behavior: 'smooth'});
+      }, 100);
+    });
+
+    // Mouse following gradient
     document.addEventListener("mousemove", (e) => {
       const x = (e.clientX / window.innerWidth) * 100 + "%";
       const y = (e.clientY / window.innerHeight) * 100 + "%";
