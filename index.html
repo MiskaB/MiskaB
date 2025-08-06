@@ -246,33 +246,6 @@
       color: var(--text-primary);
     }
 
-    .scroll-down {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 2em;
-      color: var(--text-primary);
-      text-align: center;
-      animation: bounce 1.5s infinite;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .scroll-down:hover {
-      color: var(--accent-primary);
-      transform: translateX(-50%) scale(1.1);
-    }
-
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateX(-50%) translateY(0);
-      }
-      50% {
-        transform: translateX(-50%) translateY(-10px);
-      }
-    }
-
     section#about {
       display: flex;
       align-items: center;
@@ -345,11 +318,6 @@
     <p>&copy; 2025 Miska Braun</p>
   </footer>
 
-  <div class="scroll-down">
-    ↓
-    <span>Scroll Down</span>
-  </div>
-
   <script>
     const images = document.querySelectorAll('.flying-images img');
     const container = document.querySelector('.flying-images');
@@ -385,10 +353,6 @@
       img.style.setProperty('--final-x', `${finalX}px`);
       img.style.setProperty('--final-y', `${finalY}px`);
       img.style.animationDelay = `${i * 0.25}s`;
-    });
-
-    document.querySelector('.scroll-down').addEventListener('mouseover', () => {
-      document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
     });
 
     document.addEventListener("mousemove", (e) => {
