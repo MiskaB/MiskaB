@@ -1,24 +1,24 @@
 const CACHE_NAME = 'miska-braun-portfolio-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/cv.html',
-  '/freetime.html',
-  '/contact.html',
-  '/main.js',
-  '/images/AI_2025_Sky.png',
-  '/images/AppleTouchIcon.png',
-  '/images/Profile_2025.jpeg',
-  '/images/profile2.jpeg',
-  '/images/MiskaBraun_CV.pdf',
-  '/images/icehockey.jpg',
-  '/images/travel.jpg',
-  '/images/car.jpg',
-  '/images/Family_miska.PNG',
-  '/images/Eficode_logo.png',
-  '/images/Craoyn_logo.png',
-  '/images/Pedab_logo.png',
-  '/images/IBM_logo.png'
+  '/MiskaB/',
+  '/MiskaB/index.html',
+  '/MiskaB/cv.html',
+  '/MiskaB/freetime.html',
+  '/MiskaB/contact.html',
+  '/MiskaB/main.js',
+  '/MiskaB/images/AI_2025_Sky.png',
+  '/MiskaB/images/AppleTouchIcon.png',
+  '/MiskaB/images/Profile_2025.jpeg',
+  '/MiskaB/images/profile2.jpeg',
+  '/MiskaB/images/MiskaBraun_CV.pdf',
+  '/MiskaB/images/icehockey.jpg',
+  '/MiskaB/images/travel.jpg',
+  '/MiskaB/images/car.jpg',
+  '/MiskaB/images/Family_miska.PNG',
+  '/MiskaB/images/Eficode_logo.png',
+  '/MiskaB/images/Craoyn_logo.png',
+  '/MiskaB/images/Pedab_logo.png',
+  '/MiskaB/images/IBM_logo.png'
 ];
 
 // Install event - cache resources
