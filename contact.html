@@ -14,7 +14,7 @@
   
   <style>
     :root {
-      /* Dark theme (default) - Enhanced contrast */
+      /* Dark theme - Enhanced contrast */
       --bg-primary: #0a0a0a;
       --text-primary: #ffffff;
       --text-secondary: #e0e0e0;
@@ -25,20 +25,6 @@
       --card-bg: rgba(255,255,255,0.12);
       --input-bg: rgba(255,255,255,0.08);
       --input-border: rgba(255,255,255,0.3);
-    }
-
-    [data-theme="light"] {
-      /* Light theme - Enhanced contrast */
-      --bg-primary: #ffffff;
-      --text-primary: #1a1a1a;
-      --text-secondary: #333333;
-      --accent-primary: #0056b3;
-      --accent-secondary: rgba(0,86,179,0.15);
-      --nav-bg: rgba(255, 255, 255, 0.95);
-      --nav-bg-hover: rgba(248, 248, 248, 1);
-      --card-bg: rgba(0,0,0,0.08);
-      --input-bg: rgba(255,255,255,0.95);
-      --input-border: rgba(0,0,0,0.3);
     }
 
     /* Background Image Layer */
@@ -220,39 +206,9 @@
       transform: scale(1.02);
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
-
-    .theme-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1001;
-      background: var(--nav-bg);
-      border: none;
-      border-radius: 50px;
-      padding: 10px 15px;
-      color: var(--text-primary);
-      cursor: pointer;
-      backdrop-filter: blur(5px);
-      transition: all 0.3s ease;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .theme-toggle:hover {
-      background: var(--nav-bg-hover);
-      transform: scale(1.05);
-    }
   </style>
 </head>
 <body>
-
-  <!-- Theme Toggle Button -->
-  <button class="theme-toggle" onclick="toggleTheme()">
-    <span class="theme-icon">🌙</span>
-    <span class="theme-text">Light</span>
-  </button>
 
   <!-- Left-hand Vertical Navigation -->
   <nav>
@@ -291,33 +247,6 @@
       document.body.style.setProperty("--mouse-x", x);
       document.body.style.setProperty("--mouse-y", y);
     });
-
-    function toggleTheme() {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      
-      const themeText = document.querySelector('.theme-text');
-      const themeIcon = document.querySelector('.theme-icon');
-      if (themeText) themeText.textContent = newTheme === 'light' ? 'Dark' : 'Light';
-      if (themeIcon) themeIcon.textContent = newTheme === 'light' ? '☀️' : '🌙';
-      
-      localStorage.setItem('theme', newTheme);
-    }
-
-    // Load saved theme on page load
-    function loadTheme() {
-      const savedTheme = localStorage.getItem('theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      
-      const themeText = document.querySelector('.theme-text');
-      const themeIcon = document.querySelector('.theme-icon');
-      if (themeText) themeText.textContent = savedTheme === 'light' ? 'Dark' : 'Light';
-      if (themeIcon) themeIcon.textContent = savedTheme === 'light' ? '☀️' : '🌙';
-    }
-
-    // Initialize theme on page load
-    document.addEventListener('DOMContentLoaded', loadTheme);
   </script>
 
 </body>

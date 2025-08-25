@@ -10,32 +10,6 @@ function openFullscreen(imgElem) {
   };
 }
 
-// Theme toggle functionality
-function toggleTheme() {
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', newTheme);
-  
-  // Update button text and icon
-  const themeText = document.querySelector('.theme-text');
-  const themeIcon = document.querySelector('.theme-icon');
-  if (themeText) themeText.textContent = newTheme === 'light' ? 'Dark' : 'Light';
-  if (themeIcon) themeIcon.textContent = newTheme === 'light' ? '☀️' : '🌙';
-  
-  localStorage.setItem('theme', newTheme);
-}
-
-// Load saved theme on page load
-function loadTheme() {
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', savedTheme);
-  
-  const themeText = document.querySelector('.theme-text');
-  const themeIcon = document.querySelector('.theme-icon');
-  if (themeText) themeText.textContent = savedTheme === 'light' ? 'Dark' : 'Light';
-  if (themeIcon) themeIcon.textContent = savedTheme === 'light' ? '☀️' : '🌙';
-}
-
 // PWA Service Worker Registration
 function registerServiceWorker() {
   if ('serviceWorker' in navigator) {
@@ -62,12 +36,11 @@ function scrollToTop() {
 // Initialize on page load
 if (typeof document !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
-    loadTheme();
     registerServiceWorker();
   });
 }
 
 // Export for unit testing
 if (typeof module !== 'undefined') {
-  module.exports = { openFullscreen, toggleTheme, loadTheme, scrollToTop };
+  module.exports = { openFullscreen, scrollToTop };
 }
