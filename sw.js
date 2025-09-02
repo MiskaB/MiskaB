@@ -2,6 +2,7 @@ const CACHE_NAME = 'miska-braun-portfolio-v1';
 const urlsToCache = [
   '/MiskaB/',
   '/MiskaB/index.html',
+  '/MiskaB/home.html',
   '/MiskaB/cv.html',
   '/MiskaB/freetime.html',
   '/MiskaB/contact.html',
