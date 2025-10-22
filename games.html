@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Get in touch with Miska Braun for collaboration, networking, or professional inquiries." />
+  <meta name="description" content="Play retro games created by Miska Braun - including Tetris '64 and more" />
   <meta name="author" content="Miska Braun" />
-  <title>Contact - Miska Braun</title>
+  <title>Games - Miska Braun</title>
   
   <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
@@ -14,7 +14,6 @@
   
   <style>
     :root {
-      /* Dark theme - Enhanced contrast */
       --bg-primary: #0a0a0a;
       --text-primary: #ffffff;
       --text-secondary: #e0e0e0;
@@ -23,8 +22,6 @@
       --nav-bg: rgba(0, 0, 0, 0.8);
       --nav-bg-hover: rgba(0, 0, 0, 0.95);
       --card-bg: rgba(255,255,255,0.12);
-      --input-bg: rgba(255,255,255,0.08);
-      --input-border: rgba(255,255,255,0.3);
     }
 
     /* Background Image Layer */
@@ -65,7 +62,7 @@
       transition: background 0.15s;
     }
 
-    /* Left-hand vertical nav */
+    /* Navigation */
     nav {
       position: fixed;
       top: 50%;
@@ -141,107 +138,170 @@
       }
     }
 
-    section#contact {
-      padding: 0;
-      margin: 0;
-      background: none;
-      box-shadow: none;
-      border-radius: 0;
+    /* Main Content */
+    .games-container {
       display: flex;
+      justify-content: center;
       align-items: center;
-      justify-content: flex-start;
       min-height: 100vh;
-      padding-left: 8vw;
-      padding-right: 0;
+      padding: 2em;
+      z-index: 1;
+      position: relative;
     }
 
-    .contact-form {
+    .games-content {
+      max-width: 1000px;
+      width: 100%;
       background: var(--card-bg);
-      border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-      padding: 2em 2.5em;
-      max-width: 340px;
-      width: 100%;
-      margin: 0;
-      backdrop-filter: blur(4px);
+      border-radius: 15px;
+      padding: 3em;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     }
-    .contact-form h2 {
-      margin-top: 0;
-      font-size: 1.3em;
-      color: var(--text-primary);
+
+    .games-content h1 {
+      color: var(--accent-primary);
       text-align: center;
-      font-weight: 600;
+      font-size: 2.5em;
+      margin-bottom: 1em;
+      text-transform: uppercase;
+      letter-spacing: 3px;
     }
-    .contact-form label {
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2em;
+      margin-top: 2em;
+    }
+
+    .game-card {
+      background: rgba(255,255,255,0.08);
+      border: 2px solid var(--accent-primary);
+      border-radius: 15px;
+      padding: 2em;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .game-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(255, 221, 0, 0.3);
+      background: rgba(255,255,255,0.15);
+    }
+
+    .game-icon {
+      font-size: 4em;
+      margin-bottom: 0.5em;
       display: block;
-      margin: 1em 0 0.2em 0;
-      font-size: 0.95em;
+    }
+
+    .game-card h2 {
+      color: var(--accent-primary);
+      margin-bottom: 0.5em;
+      font-size: 1.5em;
+    }
+
+    .game-card p {
       color: var(--text-secondary);
+      margin-bottom: 1.5em;
+      line-height: 1.6;
     }
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 0.5em;
-      border: 1px solid var(--input-border);
-      border-radius: 6px;
-      background: var(--input-bg);
-      color: var(--text-primary);
-      font-size: 1em;
-      margin-bottom: 0.7em;
-      resize: vertical;
-    }
-    .contact-form button {
-      width: 100%;
-      padding: 0.7em;
-      border: none;
-      border-radius: 6px;
+
+    .play-button {
       background: var(--accent-primary);
       color: var(--bg-primary);
+      border: none;
+      padding: 1em 2em;
+      border-radius: 25px;
       font-size: 1em;
-      font-weight: 600;
+      font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      display: inline-block;
     }
-    .contact-form button:hover {
-      transform: scale(1.02);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+
+    .play-button:hover {
+      background: var(--text-primary);
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(255, 221, 0, 0.3);
+    }
+
+    .intro-text {
+      text-align: center;
+      font-size: 1.2em;
+      color: var(--text-secondary);
+      margin-bottom: 2em;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+      .games-container {
+        padding: 1em;
+        padding-bottom: 100px;
+      }
+
+      .games-content {
+        padding: 2em 1.5em;
+      }
+
+      .games-content h1 {
+        font-size: 2em;
+      }
+
+      .games-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Left-hand Vertical Navigation -->
+  <!-- Navigation -->
   <nav>
     <ul>
       <li><a href="home.html">Home</a></li>
       <li><a href="freetime.html">Freetime</a></li>
       <li><a href="cv.html">CV/Professional</a></li>
-      <li><a href="contact.html" class="current-page">Contact</a></li>
-      <li><a href="games.html">Games</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="games.html" class="current-page">Games</a></li>
     </ul>
   </nav>
 
-  <section id="contact">
-    <form class="contact-form" action="mailto:miskabraun@gmail.com" method="post" enctype="text/plain">
-      <h2>Contact Miska</h2>
-      <label for="name">Name</label>
-      <input id="name" name="name" type="text" autocomplete="name" required />
+  <div class="games-container">
+    <div class="games-content">
+      <h1>🎮 Retro Games</h1>
+      
+      <div class="intro-text">
+        <p>Welcome to my collection of retro-inspired games! Built with passion for classic gaming and modern web technologies.</p>
+      </div>
 
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" autocomplete="email" required />
+      <div class="games-grid">
+        
+        <div class="game-card" onclick="window.location.href='tetris.html'">
+          <span class="game-icon">🟩</span>
+          <h2>Tetris '64</h2>
+          <p>The classic block-stacking puzzle game with retro '64 aesthetics. Clear lines, level up, and beat your high score!</p>
+          <a href="tetris.html" class="play-button">Play Now</a>
+        </div>
 
-      <label for="message">Message</label>
-      <textarea id="message" name="message" rows="3" required></textarea>
+        <div class="game-card" style="opacity: 0.6; cursor: not-allowed;">
+          <span class="game-icon">🕹️</span>
+          <h2>Coming Soon</h2>
+          <p>More retro games are in development. Stay tuned for classic arcade experiences!</p>
+          <div class="play-button" style="background: #666; cursor: not-allowed;">Coming Soon</div>
+        </div>
 
-      <button type="submit">Send</button>
-    </form>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Miska Braun</p>
-  </footer>
+      </div>
+    </div>
+  </div>
 
   <script>
+    // Mouse tracking for background effect
     document.addEventListener("mousemove", (e) => {
       const x = (e.clientX / window.innerWidth) * 100 + "%";
       const y = (e.clientY / window.innerHeight) * 100 + "%";
