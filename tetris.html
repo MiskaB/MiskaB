@@ -698,22 +698,23 @@
       nextCtx.fillRect(0, 0, nextCanvas.width, nextCanvas.height);
 
       const piece = game.nextPiece;
-      const offsetX = (nextCanvas.width - piece.shape[0].length * 20) / 2;
-      const offsetY = (nextCanvas.height - piece.shape.length * 20) / 2;
+      const blockSize = 20;
+      const offsetX = (nextCanvas.width - piece.shape[0].length * blockSize) / 2;
+      const offsetY = (nextCanvas.height - piece.shape.length * blockSize) / 2;
 
       for (let y = 0; y < piece.shape.length; y++) {
         for (let x = 0; x < piece.shape[y].length; x++) {
           if (piece.shape[y][x]) {
-            const pixelX = offsetX + x * 20;
-            const pixelY = offsetY + y * 20;
-
+            const pixelX = offsetX + x * blockSize;
+            const pixelY = offsetY + y * blockSize;
+            
             nextCtx.fillStyle = piece.color;
-            nextCtx.fillRect(pixelX + 1, pixelY + 1, 18, 18);
-
-            // Mini 3D effect
+            nextCtx.fillRect(pixelX + 1, pixelY + 1, blockSize - 2, blockSize - 2);
+            
+            // 3D effect
             nextCtx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-            nextCtx.fillRect(pixelX + 1, pixelY + 1, 18, 2);
-            nextCtx.fillRect(pixelX + 1, pixelY + 1, 2, 18);
+            nextCtx.fillRect(pixelX + 1, pixelY + 1, blockSize - 2, 2);
+            nextCtx.fillRect(pixelX + 1, pixelY + 1, 2, blockSize - 2);
           }
         }
       }
@@ -728,10 +729,14 @@
           if (shape[y][x]) {
             const boardX = newX + x;
             const boardY = newY + y;
-
-            if (boardX < 0 || boardX >= BOARD_WIDTH || 
-                boardY >= BOARD_HEIGHT || 
-                (boardY >= 0 && game.board[boardY][boardX])) {
+            
+            // Check bounds
+            if (boardX < 0 || boardX >= BOARD_WIDTH || boardY >= BOARD_HEIGHT) {
+              return false;
+            }
+            
+            // Check collision with placed pieces
+            if (boardY >= 0 && game.board[boardY][boardX]) {
               return false;
             }
           }
@@ -740,33 +745,99 @@
       return true;
     }
 
-    // Place piece on board
+    // Move piece down
+    function movePieceDown() {
+      if (!game.currentPiece) return false;
+      
+      if (canPlacePiece(game.currentPiece, game.currentPiece.x, game.currentPiece.y + 1)) {
+        game.currentPiece.y++;
+        return true;
+      } else {
+        // Piece can't move down, place it
+        placePiece();
+        return false;
+      }
+    }
+
+    // Move piece left
+    function movePieceLeft() {
+      if (!game.currentPiece) return;
+      
+      if (canPlacePiece(game.currentPiece, game.currentPiece.x - 1, game.currentPiece.y)) {
+        game.currentPiece.x--;
+      }
+    }
+
+    // Move piece right
+    function movePieceRight() {
+      if (!game.currentPiece) return;
+      
+      if (canPlacePiece(game.currentPiece, game.currentPiece.x + 1, game.currentPiece.y)) {
+        game.currentPiece.x++;
+      }
+    }
+
+    // Rotate piece
+    function rotatePiece() {
+      if (!game.currentPiece) return;
+      
+      // Create rotated shape
+      const rotated = [];
+      const shape = game.currentPiece.shape;
+      
+      for (let x = 0; x < shape[0].length; x++) {
+        rotated[x] = [];
+        for (let y = shape.length - 1; y >= 0; y--) {
+          rotated[x][shape.length - 1 - y] = shape[y][x];
+        }
+      }
+      
+      if (canPlacePiece(game.currentPiece, game.currentPiece.x, game.currentPiece.y, rotated)) {
+        game.currentPiece.shape = rotated;
+      }
+    }
+
+    // Hard drop piece
+    function hardDrop() {
+      if (!game.currentPiece) return;
+      
+      while (movePieceDown()) {
+        game.score += 2; // Bonus points for hard drop
+      }
+      updateDisplay();
+    }
+
+    // Place current piece on the board
     function placePiece() {
+      if (!game.currentPiece) return;
+      
       for (let y = 0; y < game.currentPiece.shape.length; y++) {
         for (let x = 0; x < game.currentPiece.shape[y].length; x++) {
           if (game.currentPiece.shape[y][x]) {
             const boardY = game.currentPiece.y + y;
             const boardX = game.currentPiece.x + x;
+            
             if (boardY >= 0) {
               game.board[boardY][boardX] = game.currentPiece.color;
             }
           }
         }
       }
-
+      
       // Check for completed lines
       clearLines();
-
-      // Get next piece
+      
+      // Spawn next piece
       game.currentPiece = game.nextPiece;
       game.nextPiece = createPiece();
-
+      
       // Check game over
       if (!canPlacePiece(game.currentPiece, game.currentPiece.x, game.currentPiece.y)) {
         gameOver();
       }
-
+      
       drawNextPiece();
+      updateDisplay();
     }
 
     // Clear completed lines
@@ -781,26 +852,22 @@
             break;
           }
         }
-
+        
         if (fullLine) {
-          // Add pulse effect to clearing line
-          canvas.classList.add('pulse');
-          setTimeout(() => canvas.classList.remove('pulse'), 500);
-
-          // Remove the line
+          // Remove line and add empty line at top
           game.board.splice(y, 1);
-          // Add new empty line at top
-          game.board.unshift(new Array(BOARD_WIDTH).fill(0));
+          const emptyLine = new Array(BOARD_WIDTH).fill(0);
+          game.board.unshift(emptyLine);
           
           linesCleared++;
-          y++; // Check same line again
+          y++; // Check the same line again
         }
       }
-
+      
       if (linesCleared > 0) {
-        // Update score and stats
-        const points = [0, 100, 300, 500, 800][linesCleared] * game.level;
-        game.score += points;
+        // Add score based on lines cleared
+        const lineScores = [0, 40, 100, 300, 1200];
+        game.score += lineScores[linesCleared] * (game.level + 1);
         game.lines += linesCleared;
         
         // Level up every 10 lines
@@ -809,125 +876,25 @@
           game.level = newLevel;
           game.dropInterval = Math.max(50, 1000 - (game.level - 1) * 50);
         }
-
-        updateDisplay();
+        
+        // Line clear animation effect
+        canvas.classList.add('pulse');
+        setTimeout(() => canvas.classList.remove('pulse'), 500);
       }
     }
 
-    // Rotate piece
-    function rotatePiece() {
-      if (!game.currentPiece) return;
-
-      const rotated = [];
-      const shape = game.currentPiece.shape;
-      
-      for (let x = 0; x < shape[0].length; x++) {
-        rotated[x] = [];
-        for (let y = shape.length - 1; y >= 0; y--) {
-          rotated[x][shape.length - 1 - y] = shape[y][x];
-        }
-      }
-
-      if (canPlacePiece(game.currentPiece, game.currentPiece.x, game.currentPiece.y, rotated)) {
-        game.currentPiece.shape = rotated;
-      }
-    }
-
-    // Move piece
-    function movePiece(dx, dy) {
-      if (!game.currentPiece) return false;
-
-      if (canPlacePiece(game.currentPiece, game.currentPiece.x + dx, game.currentPiece.y + dy)) {
-        game.currentPiece.x += dx;
-        game.currentPiece.y += dy;
-        return true;
-      }
-      return false;
-    }
-
-    // Hard drop
-    function hardDrop() {
-      if (!game.currentPiece) return;
-
-      while (movePiece(0, 1)) {
-        game.score += 2;
-      }
-      placePiece();
-      updateDisplay();
-    }
-
-    // Update display
+    // Update display elements
     function updateDisplay() {
-      document.getElementById('score').textContent = game.score.toLocaleString();
+      document.getElementById('score').textContent = game.score;
       document.getElementById('level').textContent = game.level;
       document.getElementById('lines').textContent = game.lines;
-
+      
       // Update high score
-      const currentHighScore = parseInt(document.getElementById('highScore').textContent.replace(/,/g, ''));
+      const currentHighScore = parseInt(document.getElementById('highScore').textContent);
       if (game.score > currentHighScore) {
-        document.getElementById('highScore').textContent = game.score.toLocaleString();
+        document.getElementById('highScore').textContent = game.score;
         localStorage.setItem('tetris-high-score', game.score);
       }
-    }
-
-    // Game loop
-    function gameLoop(currentTime) {
-      if (!game.gameRunning || game.gamePaused) {
-        requestAnimationFrame(gameLoop);
-        return;
-      }
-
-      const deltaTime = currentTime - game.lastTime;
-      game.lastTime = currentTime;
-      game.dropTime += deltaTime;
-
-      if (game.dropTime >= game.dropInterval) {
-        if (!movePiece(0, 1)) {
-          placePiece();
-        }
-        game.dropTime = 0;
-      }
-
-      drawBoard();
-      requestAnimationFrame(gameLoop);
-    }
-
-    // Start new game
-    function startNewGame() {
-      game.score = 0;
-      game.lines = 0;
-      game.level = 1;
-      game.dropInterval = 1000;
-      game.dropTime = 0;
-      game.gameRunning = true;
-      game.gamePaused = false;
-
-      initGame();
-      updateDisplay();
-
-      document.getElementById('startBtn').disabled = true;
-      document.getElementById('pauseBtn').disabled = false;
-      document.getElementById('gameOver').style.display = 'none';
-
-      requestAnimationFrame(gameLoop);
-    }
-
-    // Pause game
-    function pauseGame() {
-      game.gamePaused = !game.gamePaused;
-      document.getElementById('pauseBtn').textContent = game.gamePaused ? 'Resume' : 'Pause';
-    }
-
-    // Reset game
-    function resetGame() {
-      game.gameRunning = false;
-      game.gamePaused = false;
-      document.getElementById('startBtn').disabled = false;
-      document.getElementById('pauseBtn').disabled = true;
-      document.getElementById('pauseBtn').textContent = 'Pause';
-      document.getElementById('gameOver').style.display = 'none';
-      
-      initGame();
     }
 
     // Game over
@@ -935,73 +902,90 @@
       game.gameRunning = false;
       document.getElementById('startBtn').disabled = false;
       document.getElementById('pauseBtn').disabled = true;
-      document.getElementById('pauseBtn').textContent = 'Pause';
       
-      document.getElementById('finalScore').textContent = `Score: ${game.score.toLocaleString()}`;
-      document.getElementById('gameOver').style.display = 'block';
+      // Show game over message
+      const gameOverDiv = document.createElement('div');
+      gameOverDiv.className = 'game-over';
+      gameOverDiv.innerHTML = `
+        <h2>Game Over!</h2>
+        <div class="final-score">Final Score: ${game.score}</div>
+        <button class="control-button" onclick="this.parentElement.remove(); resetGame();">Play Again</button>
+      `;
+      gameOverDiv.style.display = 'block';
+      document.querySelector('.game-board').appendChild(gameOverDiv);
     }
 
-    // Event listeners
-    document.getElementById('startBtn').addEventListener('click', startNewGame);
-    document.getElementById('pauseBtn').addEventListener('click', pauseGame);
-    document.getElementById('resetBtn').addEventListener('click', resetGame);
-
-    // Keyboard controls
-    document.addEventListener('keydown', (e) => {
-      if (!game.gameRunning || game.gamePaused) return;
-
-      switch(e.key) {
-        case 'ArrowLeft':
-          e.preventDefault();
-          movePiece(-1, 0);
-          break;
-        case 'ArrowRight':
-          e.preventDefault();
-          movePiece(1, 0);
-          break;
-        case 'ArrowDown':
-          e.preventDefault();
-          if (movePiece(0, 1)) {
-            game.score += 1;
-            updateDisplay();
-          }
-          break;
-        case 'ArrowUp':
-          e.preventDefault();
-          rotatePiece();
-          break;
-        case ' ':
-          e.preventDefault();
-          hardDrop();
-          break;
-        case 'p':
-        case 'P':
-          e.preventDefault();
-          pauseGame();
-          break;
+    // Game loop
+    function gameLoop(time) {
+      if (!game.gameRunning || game.gamePaused) {
+        if (game.gameRunning) {
+          requestAnimationFrame(gameLoop);
+        }
+        return;
       }
       
-      if (game.gameRunning) {
-        drawBoard();
+      const deltaTime = time - game.lastTime;
+      game.dropTime += deltaTime;
+      
+      if (game.dropTime > game.dropInterval) {
+        movePieceDown();
+        game.dropTime = 0;
       }
-    });
+      
+      drawBoard();
+      game.lastTime = time;
+      requestAnimationFrame(gameLoop);
+    }
 
-    // Mobile touch controls handler
+    // Start game
+    function startGame() {
+      game.gameRunning = true;
+      game.gamePaused = false;
+      document.getElementById('startBtn').disabled = true;
+      document.getElementById('pauseBtn').disabled = false;
+      
+      game.lastTime = 0;
+      requestAnimationFrame(gameLoop);
+    }
+
+    // Pause game
+    function pauseGame() {
+      game.gamePaused = !game.gamePaused;
+      const pauseBtn = document.getElementById('pauseBtn');
+      pauseBtn.textContent = game.gamePaused ? 'Resume' : 'Pause';
+    }
+
+    // Reset game
+    function resetGame() {
+      game.gameRunning = false;
+      game.gamePaused = false;
+      game.score = 0;
+      game.lines = 0;
+      game.level = 1;
+      game.dropInterval = 1000;
+      game.dropTime = 0;
+      
+      document.getElementById('startBtn').disabled = false;
+      document.getElementById('pauseBtn').disabled = true;
+      document.getElementById('pauseBtn').textContent = 'Pause';
+      
+      initGame();
+    }
+
+    // Handle mobile input
     function handleMobileInput(action) {
       if (!game.gameRunning || game.gamePaused) return;
-
+      
       switch(action) {
         case 'left':
-          movePiece(-1, 0);
+          movePieceLeft();
           break;
         case 'right':
-          movePiece(1, 0);
+          movePieceRight();
           break;
         case 'down':
-          if (movePiece(0, 1)) {
-            game.score += 1;
-            updateDisplay();
-          }
+          movePieceDown();
+          game.score += 1;
           break;
         case 'rotate':
           rotatePiece();
@@ -1010,13 +994,51 @@
           hardDrop();
           break;
       }
-      
-      if (game.gameRunning) {
-        drawBoard();
-      }
+      drawBoard();
+      updateDisplay();
     }
 
-    // Initialize on load
+    // Keyboard controls
+    document.addEventListener('keydown', (e) => {
+      if (!game.gameRunning || game.gamePaused) return;
+      
+      switch(e.code) {
+        case 'ArrowLeft':
+          e.preventDefault();
+          movePieceLeft();
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          movePieceRight();
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          movePieceDown();
+          game.score += 1;
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          rotatePiece();
+          break;
+        case 'Space':
+          e.preventDefault();
+          hardDrop();
+          break;
+        case 'KeyP':
+          e.preventDefault();
+          pauseGame();
+          break;
+      }
+      drawBoard();
+      updateDisplay();
+    });
+
+    // Button event listeners
+    document.getElementById('startBtn').addEventListener('click', startGame);
+    document.getElementById('pauseBtn').addEventListener('click', pauseGame);
+    document.getElementById('resetBtn').addEventListener('click', resetGame);
+
+    // Initialize game when page loads
     window.addEventListener('load', () => {
       initGame();
     });
