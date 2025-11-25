@@ -2,15 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <meta name="description" content="Play Tetris '64 - A classic block puzzle game with retro vibes by Miska Braun" />
   <meta name="author" content="Miska Braun" />
+  <!-- v2.0 - Updated button styling -->
   <title>Tetris '64 - Miska Braun</title>
   
   <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="images/AppleTouchIcon.png">
-  <meta name="theme-color" content="#ffd700">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-title" content="Tetris '64">
   
   <style>
     :root {
@@ -150,6 +155,8 @@
       border: 2px solid var(--grid-color);
       image-rendering: pixelated;
       box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+      max-width: 100%;
+      max-height: 100%;
     }
 
     /* Side Panels */
@@ -277,53 +284,180 @@
       color: var(--text-primary);
     }
 
-    /* Mobile Responsive - Only apply on actual mobile devices */
-    @media (max-width: 768px) and (orientation: portrait), 
-           (max-width: 768px) and (max-height: 600px) {
+    /* Mobile Responsive - Only for actual mobile devices */
+    @media (max-width: 768px) and (hover: none) and (pointer: coarse) {
+      body {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+
       nav {
-        top: unset !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        transform: none !important;
-        border-radius: 10px 10px 0 0 !important;
-        padding: 0.5em !important;
+        display: none !important;
       }
 
-      nav ul {
-        flex-direction: row !important;
-        justify-content: space-around !important;
-      }
-
-      nav ul li a {
-        writing-mode: horizontal-tb !important;
-        transform: none !important;
-        font-size: 0.9rem !important;
-      }
-
-      nav ul li a:hover {
-        transform: scale(1.15) !important;
+      .mobile-back-btn {
+        display: block !important;
       }
 
       .tetris-game {
-        grid-template-columns: 1fr !important;
-        grid-template-rows: auto auto auto !important;
-        gap: 1em !important;
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100vh;
+        gap: 0 !important;
+        grid-template-columns: unset !important;
+        grid-template-rows: unset !important;
       }
 
       .game-container {
-        padding: 1em !important;
-        padding-bottom: 100px !important;
+        padding: 0 !important;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .game-board {
+        flex: 1;
+        min-height: 0;
+        padding: 0.5em !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        overflow: hidden;
       }
 
       #gameCanvas {
-        width: 100% !important;
-        max-width: 300px !important;
+        flex: 1;
+        width: auto !important;
         height: auto !important;
+        max-width: calc(100vw - 2em) !important;
+        max-height: calc(100vh - 60px) !important;
       }
 
       .side-panel {
-        min-width: auto !important;
+        display: none !important;
+      }
+
+      .controls {
+        margin-top: 0.3em !important;
+        margin-bottom: 0.3em !important;
+        display: none !important;
+      }
+
+      .game-board {
+        padding: 0.5em !important;
+      }
+
+      #gameCanvas {
+        max-width: calc(100vw - 1em) !important;
+        max-height: calc(100vh - 60px) !important;
+      }
+
+      .mobile-controls {
+        display: block !important;
+        padding: 0.3em;
+        position: relative;
+        bottom: auto;
+        height: auto;
+        flex-shrink: 0;
+        border-top: 2px solid var(--accent-primary);
+        background: var(--game-bg);
+      }
+
+      .mobile-controls-grid {
+        gap: 0.25em;
+        max-width: 100%;
+      }
+
+      .mobile-btn {
+        padding: 0.5em;
+        font-size: 0.9em;
+      }
+
+      .control-button {
+        padding: 0.35em 0.7em !important;
+        margin: 0 !important;
+        font-size: 0.7em !important;
+      }
+
+      .mobile-controls-grid {
+        max-width: 100%;
+        gap: 0.3em;
+      }
+
+      .mobile-btn {
+        padding: 0.8em;
+        font-size: 1.1em;
+      }
+
+      .game-over {
+        max-width: 90%;
+        padding: 1.5em;
+      }
+    }
+
+    /* Landscape mobile optimization - Only for actual mobile devices */
+    @media (max-width: 900px) and (orientation: landscape) and (hover: none) and (pointer: coarse) {
+      body {
+        overflow: hidden;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      nav {
+        display: none !important;
+      }
+
+      .mobile-back-btn {
+        display: block !important;
+      }
+
+      .mobile-new-game-btn {
+        display: block !important;
+      }
+
+      .game-container {btn {
+        display: block !important;
+      }
+
+      .game-container {
+        padding: 0 !important;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .tetris-game {
+        display: flex !important;
+        flex-direction: row !important;
+        height: 100vh;
+        gap: 0 !important;
+      }
+
+      .game-board {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .side-panel {
+        display: none !important;
+      }
+
+      #gameCanvas {
+        flex: 1;
+        height: auto !important;
+        width: auto !important;
+        max-height: calc(100vh - 3em) !important;
+      }
+
+      .controls {
+        display: none !important;
       }
     }
 
@@ -346,26 +480,81 @@
       animation: slideDown 0.3s ease-out;
     }
 
-    /* Mobile Touch Controls */
+    /* Mobile Touch Controls - Hidden, using gesture-based controls */
     .mobile-controls {
-      display: none;
+      display: none !important;
+    }
+
+    .mobile-back-btn {
       position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--game-bg);
-      border-top: 2px solid var(--accent-primary);
-      padding: 1em;
-      z-index: 500;
-      backdrop-filter: blur(10px);
+      top: 10px;
+      left: 10px;
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+      border: none;
+      padding: 0.5em 1em;
+      border-radius: 5px;
+      font-size: 0.9em;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1001;
+      display: none;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .mobile-back-btn:hover {
+      background: var(--text-primary);
+    }
+
+    .mobile-back-btn:active {
+      transform: scale(0.95);
+      background: var(--accent-primary);
+    }
+
+    .mobile-back-btn:visited {
+      color: var(--bg-primary);
+      background: var(--accent-primary);
+    }
+
+    .mobile-back-btn:link {
+      color: var(--bg-primary);
+      background: var(--accent-primary);
+    }
+
+    .mobile-new-game-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+      border: none;
+      padding: 0.5em 1em;
+      border-radius: 5px;
+      font-size: 0.9em;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1001;
+      display: none;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .mobile-new-game-btn:hover {
+      background: var(--text-primary);
+    }
+
+    .mobile-new-game-btn:active {
+      transform: scale(0.95);
+      background: var(--accent-primary);
     }
 
     .mobile-controls-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       grid-template-rows: 1fr 1fr;
-      gap: 0.5em;
-      max-width: 300px;
+      gap: 0.3em;
+      max-width: 240px;
       margin: 0 auto;
     }
 
@@ -373,9 +562,9 @@
       background: var(--accent-primary);
       color: var(--bg-primary);
       border: none;
-      padding: 1em;
-      border-radius: 8px;
-      font-size: 1.2em;
+      padding: 0.6em;
+      border-radius: 6px;
+      font-size: 1em;
       font-weight: bold;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -413,19 +602,6 @@
       grid-row: 1;
     }
 
-    @media (max-width: 768px) {
-      .mobile-controls {
-        display: block;
-      }
-
-      .game-container {
-        padding-bottom: 120px;
-      }
-
-      .tetris-game {
-        margin-bottom: 2em;
-      }
-    }
   </style>
 </head>
 <body>
@@ -440,6 +616,10 @@
       <li><a href="games.html" class="current-page">Games</a></li>
     </ul>
   </nav>
+
+  <!-- Mobile Back Button -->
+  <a href="games.html" class="mobile-back-btn" style="background: #ffdd00; color: #0a0a0a; text-decoration: none;">← Games</a>
+  <button class="mobile-new-game-btn" id="mobileNewGameBtn" style="background: #ffdd00; color: #0a0a0a;">New Game</button>
 
   <div class="game-container">
     <div class="tetris-game">
@@ -494,18 +674,11 @@
     </div>
   </div>
 
-  <!-- Mobile Touch Controls -->
-  <div class="mobile-controls">
-    <div class="mobile-controls-grid">
-      <button class="mobile-btn rotate" onclick="handleMobileInput('rotate')">↻</button>
-      <button class="mobile-btn drop" onclick="handleMobileInput('drop')">⬇⬇</button>
-      <button class="mobile-btn left" onclick="handleMobileInput('left')">←</button>
-      <button class="mobile-btn down" onclick="handleMobileInput('down')">↓</button>
-      <button class="mobile-btn right" onclick="handleMobileInput('right')">→</button>
-    </div>
-  </div>
-
   <script>
+    // Detect mobile and screen size
+    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                   (('ontouchstart' in window) && window.matchMedia('(hover: none) and (pointer: coarse)').matches);
+    
     // Game state
     let game = {
       board: [],
@@ -530,7 +703,49 @@
     // Game constants
     const BOARD_WIDTH = 10;
     const BOARD_HEIGHT = 20;
-    const BLOCK_SIZE = 30;
+    let BLOCK_SIZE = 30;
+    
+    // Dynamic canvas sizing for mobile
+    function resizeCanvas() {
+      // Only apply mobile sizing if truly a mobile/touch device
+      const isTouchDevice = ('ontouchstart' in window) && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+      
+      if (isTouchDevice) {
+        // Mobile: canvas will auto-size with flexbox
+        
+        // Calculate block size based on available space
+        const availableWidth = Math.min(window.innerWidth - 16, 400);
+        const availableHeight = window.innerHeight - 200;
+        
+        const blockSizeByWidth = Math.floor(availableWidth / BOARD_WIDTH);
+        const blockSizeByHeight = Math.floor(availableHeight / BOARD_HEIGHT);
+        BLOCK_SIZE = Math.min(blockSizeByWidth, blockSizeByHeight, 30);
+        
+        canvas.width = BOARD_WIDTH * BLOCK_SIZE;
+        canvas.height = BOARD_HEIGHT * BLOCK_SIZE;
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+      } else {
+        // Desktop: keep default size
+        BLOCK_SIZE = 30;
+        canvas.width = BOARD_WIDTH * BLOCK_SIZE;
+        canvas.height = BOARD_HEIGHT * BLOCK_SIZE;
+        canvas.style.width = (BOARD_WIDTH * BLOCK_SIZE) + 'px';
+        canvas.style.height = (BOARD_HEIGHT * BLOCK_SIZE) + 'px';
+      }
+      
+      // Redraw if game is running
+      if (game.gameRunning) {
+        drawBoard();
+      }
+    }
+    
+    // Initial resize and add listeners
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(resizeCanvas, 100);
+    });
 
     // Tetris piece shapes
     const PIECES = [
@@ -972,30 +1187,74 @@
       initGame();
     }
 
-    // Handle mobile input
-    function handleMobileInput(action) {
+    // Touch gesture controls for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+    const SWIPE_THRESHOLD = 30;
+    const TAP_TIME_THRESHOLD = 200;
+
+    canvas.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const rect = canvas.getBoundingClientRect();
+      touchStartX = touch.clientX - rect.left;
+      touchStartY = touch.clientY - rect.top;
+      touchStartTime = Date.now();
+    }, { passive: false });
+
+    canvas.addEventListener('touchend', (e) => {
       if (!game.gameRunning || game.gamePaused) return;
+      e.preventDefault();
       
-      switch(action) {
-        case 'left':
-          movePieceLeft();
-          break;
-        case 'right':
+      const touch = e.changedTouches[0];
+      const rect = canvas.getBoundingClientRect();
+      const touchEndX = touch.clientX - rect.left;
+      const touchEndY = touch.clientY - rect.top;
+      const touchEndTime = Date.now();
+      
+      const deltaX = touchEndX - touchStartX;
+      const deltaY = touchEndY - touchStartY;
+      const deltaTime = touchEndTime - touchStartTime;
+      
+      // Check if it's a tap (quick touch with minimal movement)
+      if (Math.abs(deltaX) < SWIPE_THRESHOLD && Math.abs(deltaY) < SWIPE_THRESHOLD && deltaTime < TAP_TIME_THRESHOLD) {
+        // Tap to rotate
+        rotatePiece();
+      } else if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Horizontal swipe
+        if (deltaX > SWIPE_THRESHOLD) {
           movePieceRight();
-          break;
-        case 'down':
-          movePieceDown();
-          game.score += 1;
-          break;
-        case 'rotate':
-          rotatePiece();
-          break;
-        case 'drop':
-          hardDrop();
-          break;
+        } else if (deltaX < -SWIPE_THRESHOLD) {
+          movePieceLeft();
+        }
+      } else if (deltaY > SWIPE_THRESHOLD) {
+        // Swipe down for quick drop
+        while (movePieceDown()) {
+          game.score += 2;
+        }
       }
+      
       drawBoard();
       updateDisplay();
+    }, { passive: false });
+
+    // Prevent default touch behavior on canvas
+    canvas.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+    }, { passive: false });
+
+    // Mobile New Game button
+    const mobileNewGameBtn = document.getElementById('mobileNewGameBtn');
+    if (mobileNewGameBtn) {
+      mobileNewGameBtn.addEventListener('click', () => {
+        // Remove any game over overlay
+        const gameOverDiv = document.querySelector('.game-over');
+        if (gameOverDiv) gameOverDiv.remove();
+        
+        resetGame();
+        startGame();
+      });
     }
 
     // Keyboard controls

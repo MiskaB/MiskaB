@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Layout Test</title>
+    <style>
+        body { margin: 0; font-family: Arial; }
+        .test-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            border: 2px solid red;
+        }
+        .game-area {
+            flex: 1;
+            min-height: 0;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .controls {
+            flex-shrink: 0;
+            background: #333;
+            padding: 1em;
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="game-area">
+            <div>Game Canvas Area - Should fill remaining space</div>
+        </div>
+        <div class="controls">
+            Controls Area - Fixed height, should not overlap
+        </div>
+    </div>
+    <script>
+        console.log('Window height:', window.innerHeight);
+        console.log('Game area height:', document.querySelector('.game-area').offsetHeight);
+        console.log('Controls height:', document.querySelector('.controls').offsetHeight);
+    </script>
+</body>
+</html>

@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=deviwidth, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>Synthwave Void Striker 2D - Miska Braun</title>
     <meta name="description" content="Play Synthwave Void Striker 2D - A retro space shooter with synthwave music by Miska Braun" />
     <meta name="author" content="Miska Braun" />
@@ -10,7 +13,8 @@
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="images/AppleTouchIcon.png">
-    <meta name="theme-color" content="#ffd700">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-title" content="Space Strike">
     
     <style>
         :root {
@@ -52,7 +56,6 @@
             --mouse-y: 50%;
             position: relative;
             overflow-x: hidden;
-            touch-action: none;
         }
 
         body::after {
@@ -152,6 +155,8 @@
             border: 2px solid var(--grid-color);
             width: 600px;
             height: 800px;
+            max-width: 100%;
+            max-height: 100%;
             image-rendering: pixelated;
             box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
         }
@@ -430,58 +435,234 @@
             background: rgba(255, 221, 0, 1);
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 768px) and (orientation: portrait), 
-               (max-width: 768px) and (max-height: 600px) {
+        .mobile-back-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            font-size: 0.9em;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            display: none;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .mobile-back-btn:hover {
+            background: var(--text-primary);
+        }
+
+        .mobile-back-btn:active {
+            transform: scale(0.95);
+            background: var(--accent-primary);
+        }
+
+        .mobile-back-btn:visited {
+            color: var(--bg-primary);
+            background: var(--accent-primary);
+        }
+
+        .mobile-back-btn:link {
+            color: var(--bg-primary);
+            background: var(--accent-primary);
+        }
+
+        /* Mobile Responsive - Only for actual mobile devices */
+        @media (max-width: 768px) and (hover: none) and (pointer: coarse) {
+            body {
+                overflow: hidden;
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+                touch-action: none;
+            }
+
             nav {
-                top: unset !important;
-                bottom: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                transform: none !important;
-                border-radius: 10px 10px 0 0 !important;
-                padding: 0.5em !important;
+                display: none !important;
             }
 
-            nav ul {
-                flex-direction: row !important;
-                justify-content: space-around !important;
-            }
-
-            nav ul li a {
-                writing-mode: horizontal-tb !important;
-                transform: none !important;
-                font-size: 0.9rem !important;
-            }
-
-            nav ul li a:hover {
-                transform: scale(1.15) !important;
+            .mobile-back-btn {
+                display: block !important;
             }
 
             .space-game {
-                grid-template-columns: 1fr !important;
-                grid-template-rows: auto auto auto !important;
-                gap: 1em !important;
+                display: flex !important;
+                flex-direction: column !important;
+                height: 100vh;
+                gap: 0 !important;
+                grid-template-columns: unset !important;
+                grid-template-rows: unset !important;
             }
 
             .game-container {
-                padding: 1em !important;
-                padding-bottom: 200px !important;
+                padding: 0 !important;
+                height: 100vh;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .game-board {
+                flex: 1;
+                min-height: 0;
+                padding: 0.5em !important;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                overflow: hidden;
             }
 
             #gameCanvas {
-                width: 100% !important;
-                max-width: 400px !important;
+                flex: 1;
+                width: auto !important;
                 height: auto !important;
-                aspect-ratio: 3/4 !important;
+                max-width: calc(100vw - 1em) !important;
+                max-height: 100% !important;
+                object-fit: contain;
             }
 
             .side-panel {
-                min-width: auto !important;
+                display: none !important;
+            }
+
+            .controls {
+                margin-top: 0.3em !important;
+                margin-bottom: 0.3em !important;
+                display: flex;
+                gap: 0.3em;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            .control-button {
+                padding: 0.4em 0.8em !important;
+                margin: 0 !important;
+                font-size: 0.75em !important;
             }
 
             #mobile-ui {
                 display: block;
+                padding: 0.5em;
+                position: relative;
+                bottom: auto;
+                height: auto;
+                flex-shrink: 0;
+                border-top: 2px solid var(--accent-primary);
+                background: var(--game-bg);
+            }
+
+            .mobile-controls-grid {
+                max-width: 100%;
+                gap: 0.3em;
+            }
+
+            .mobile-btn {
+                padding: 0.8em;
+                font-size: 1.1em;
+            }
+
+            #ui-overlay {
+                font-size: 0.85em;
+            }
+
+            #score-overlay {
+                font-size: 1.2em;
+                top: 10px;
+                left: auto;
+                right: 10px;
+            }
+
+            #weapon-level-overlay,
+            #shield-status-overlay {
+                font-size: 0.9em;
+                top: 35px;
+            }
+
+            #mute-btn {
+                font-size: 20px;
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        /* Landscape mobile optimization - Only for actual mobile devices */
+        @media (max-width: 900px) and (orientation: landscape) and (hover: none) and (pointer: coarse) {
+            body {
+                overflow: hidden;
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+            }
+
+            nav {
+                display: none !important;
+            }
+
+            .mobile-back-btn {
+                display: block !important;
+            }
+
+            .game-container {
+                padding: 0 !important;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .space-game {
+                display: flex !important;
+                flex-direction: row !important;
+                height: 100vh;
+                gap: 0 !important;
+            }
+
+            .game-board {
+                flex: 1;
+                min-width: 0;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .side-panel {
+                display: none !important;
+            }
+
+            #gameCanvas {
+                flex: 1;
+                height: auto !important;
+                width: auto !important;
+                max-height: calc(100vh - 3em) !important;
+            }
+
+            .controls {
+                flex-shrink: 0;
+            }
+
+            #mobile-ui {
+                display: block;
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                width: 140px;
+                height: 100%;
+                flex-shrink: 0;
+                border-top: none;
+                border-left: 2px solid var(--accent-primary);
+                padding: 0.5em;
+            }
+
+            .mobile-controls-grid {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
             }
         }
 
@@ -508,6 +689,9 @@
             <li><a href="games.html" class="current-page">Games</a></li>
         </ul>
     </nav>
+
+    <!-- Mobile Back Button -->
+    <a href="games.html" class="mobile-back-btn">← Games</a>
 
     <div class="game-container">
         <div class="space-game">
@@ -609,9 +793,35 @@
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d', { alpha: false });
         
+        // Detect mobile and screen size
+        let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                       (('ontouchstart' in window) && window.matchMedia('(hover: none) and (pointer: coarse)').matches);
         let width = 600, height = 800;
-        let isMobile = 'ontouchstart' in window;
-        if (isMobile) document.getElementById('mobile-ui').style.display = 'block';
+        
+        // Dynamic canvas sizing for mobile
+        function resizeCanvas() {
+            // Only apply mobile sizing if truly a mobile/touch device
+            const isTouchDevice = ('ontouchstart' in window) && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+            
+            if (isTouchDevice) {
+                // Mobile: canvas will auto-size with flexbox, just show controls
+                document.getElementById('mobile-ui').style.display = 'block';
+                canvas.style.width = '100%';
+                canvas.style.height = '100%';
+            } else {
+                // Desktop: keep default size
+                canvas.style.width = '600px';
+                canvas.style.height = '800px';
+                document.getElementById('mobile-ui').style.display = 'none';
+            }
+        }
+        
+        // Initial resize and add listener
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('orientationchange', () => {
+            setTimeout(resizeCanvas, 100);
+        });
 
         // Load high score
         let highScore = localStorage.getItem('spacestrike-high-score') || 0;
