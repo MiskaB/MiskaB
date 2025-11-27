@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>AI Partnership Puzzle - MiskaB</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <meta name="theme-color" content="#ffdd00">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <style>
+    :root {
+      --accent-primary: #ffdd00;
+      --accent-secondary: #ff6b6b;
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #1a1a1a;
+      --text-primary: #ffffff;
+      --text-secondary: #b0b0b0;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 221, 0, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('images/AI_2025_Sky.png') center/cover;
+      filter: grayscale(70%) blur(0.1px);
+      opacity: 0.82;
+      z-index: -1;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 100vh;
+      background: rgba(10, 10, 10, 0.95);
+      padding: 2em 0;
+      z-index: 100;
+      border-right: 2px solid var(--accent-primary);
+      backdrop-filter: blur(10px);
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    nav li {
+      margin: 0.5em 0;
+    }
+
+    nav a {
+      display: block;
+      padding: 0.75em 1.5em;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border-left: 3px solid transparent;
+    }
+
+    nav a:hover {
+      background: rgba(255, 221, 0, 0.1);
+      border-left-color: var(--accent-primary);
+      padding-left: 2em;
+    }
+
+    nav a.current-page {
+      background: rgba(255, 221, 0, 0.2);
+      border-left-color: var(--accent-primary);
+      font-weight: bold;
+    }
+
+    /* Main Content */
+    main {
+      margin-left: 200px;
+      padding: 2em 4em;
+      max-width: 900px;
+    }
+
+    /* Article Header */
+    .article-header {
+      margin-bottom: 3em;
+      padding-bottom: 2em;
+      border-bottom: 2px solid var(--card-border);
+    }
+
+    .article-header h1 {
+      font-size: 2.5em;
+      color: var(--accent-primary);
+      margin-bottom: 0.5em;
+      line-height: 1.2;
+    }
+
+    .article-meta {
+      display: flex;
+      gap: 2em;
+      color: var(--text-secondary);
+      font-size: 0.95em;
+      flex-wrap: wrap;
+    }
+
+    .article-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+
+    .article-meta span::before {
+      content: '●';
+      color: var(--accent-primary);
+    }
+
+    /* Article Content */
+    .article-content {
+      font-size: 1.1em;
+      line-height: 1.8;
+    }
+
+    .article-content p {
+      margin-bottom: 1.5em;
+    }
+
+    .article-content h2 {
+      color: var(--accent-primary);
+      font-size: 1.8em;
+      margin-top: 2em;
+      margin-bottom: 1em;
+      padding-bottom: 0.5em;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .article-content h3 {
+      color: var(--text-primary);
+      font-size: 1.4em;
+      margin-top: 1.5em;
+      margin-bottom: 0.75em;
+    }
+
+    .article-content ul, .article-content ol {
+      margin-left: 2em;
+      margin-bottom: 1.5em;
+    }
+
+    .article-content li {
+      margin-bottom: 0.75em;
+    }
+
+    .article-content strong {
+      color: var(--accent-primary);
+    }
+
+    /* Highlight Box */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(255, 221, 0, 0.1), rgba(255, 107, 107, 0.1));
+      border: 2px solid var(--accent-primary);
+      border-radius: 8px;
+      padding: 2em;
+      margin: 2em 0;
+    }
+
+    .highlight-box h3 {
+      margin-top: 0;
+      color: var(--accent-primary);
+      margin-bottom: 1em;
+    }
+
+    .highlight-box ul {
+      margin-left: 1.5em;
+    }
+
+    /* Back Button */
+    .back-button {
+      display: inline-block;
+      margin-bottom: 2em;
+      padding: 0.75em 1.5em;
+      background: var(--card-bg);
+      color: var(--text-primary);
+      text-decoration: none;
+      border: 2px solid var(--card-border);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      background: rgba(255, 221, 0, 0.2);
+      border-color: var(--accent-primary);
+      transform: translateX(-5px);
+    }
+
+    .back-button::before {
+      content: '← ';
+    }
+
+    /* Read Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 200px;
+      right: 0;
+      height: 4px;
+      background: var(--bg-secondary);
+      z-index: 1000;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--accent-primary);
+      width: 0%;
+      transition: width 0.1s ease;
+    }
+
+    /* Quote Box */
+    .quote-box {
+      background: var(--card-bg);
+      border-left: 4px solid var(--accent-primary);
+      padding: 1.5em;
+      margin: 2em 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      border-radius: 4px;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      nav {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-top: 2px solid var(--accent-primary);
+        padding: 0;
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+
+      nav ul {
+        display: flex;
+        justify-content: space-around;
+        padding: 0.5em 0;
+      }
+
+      nav li {
+        margin: 0;
+        flex: 1;
+      }
+
+      nav a {
+        padding: 0.75em 0.5em;
+        text-align: center;
+        font-size: 0.85em;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+      }
+
+      nav a:hover,
+      nav a.current-page {
+        padding-left: 0.5em;
+        border-left: none;
+        border-bottom-color: var(--accent-primary);
+      }
+
+      main {
+        margin-left: 0;
+        margin-bottom: 80px;
+        padding: 1.5em;
+        padding-top: calc(1.5em + env(safe-area-inset-top));
+      }
+
+      .article-header h1 {
+        font-size: 1.8em;
+      }
+
+      .article-meta {
+        flex-direction: column;
+        gap: 0.5em;
+      }
+
+      .article-content {
+        font-size: 1em;
+      }
+
+      .article-content h2 {
+        font-size: 1.5em;
+      }
+
+      .article-content h3 {
+        font-size: 1.25em;
+      }
+
+      .progress-bar {
+        left: 0;
+      }
+
+      .highlight-box {
+        padding: 1.5em;
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      nav a:hover {
+        padding-left: 0.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-bar">
+    <div class="progress-bar-fill" id="progressBar"></div>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="freetime.html">Freetime</a></li>
+      <li><a href="blogs.html" class="current-page">Blogs</a></li>
+      <li><a href="cv.html">Career</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="games.html">Games</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <a href="blogs.html" class="back-button">Back to Blogs</a>
+
+    <article>
+      <header class="article-header">
+        <h1>The AI Partnership Puzzle: Assembling Without a Manual</h1>
+        <div class="article-meta">
+          <span>Miska Braun</span>
+          <span>November 27, 2025</span>
+          <span>6 min read</span>
+          <span>AI</span>
+        </div>
+      </header>
+
+      <div class="article-content">
+        <h2>My today's two cents on AI.</h2>
+        
+        <p>
+          I've spent the past year not learning to code better (that's still on the to-do list 😄 and I still can't code), but in back-to-back AI conversations with Microsoft, GitHub, AWS, and a whole ecosystem of partners.
+        </p>
+
+        <p>
+          And honestly? It often feels like we're all trying to assemble IKEA furniture… except nobody has the manual. Or they had it, lost it, or used it to level a table.
+        </p>
+
+        <p>
+          Everyone wants "One AI for me please." Very few are ready for the realities. Here goes:
+        </p>
+
+        <h2>Ownership chaos</h2>
+
+        <p>
+          AI sits in every department — and in none of them.
+        </p>
+
+        <ul>
+          <li><strong>IT:</strong> "We have the platform, so it's ours."</li>
+          <li><strong>Developers:</strong> "Agents! We have them. They have us."</li>
+          <li><strong>Security:</strong> "Put it in a concrete vault immediately."</li>
+          <li><strong>Management:</strong> "AI, but safe, fast, magical… and preferably free."</li>
+        </ul>
+
+        <p>
+          I've even seen teams arguing about who owns AI before discussing what they actually want to achieve with it.
+        </p>
+
+        <h2>GTM for product + services = spicy chaos</h2>
+
+        <p>
+          Product companies want neat, packaged AI solutions that "just onboard instantly." Services companies want to explore, customise, and fix the mess underneath.
+        </p>
+
+        <p>
+          AI sits in the middle whispering: "Good luck aligning those sales and GTM motions 😈"
+        </p>
+
+        <p>
+          This slows more deals than any skill gap or tech gap ever has.
+        </p>
+
+        <h2>AI moves faster than governance</h2>
+
+        <p>
+          Partners want to co-sell.
+        </p>
+        <p> 
+          Vendors want to scale.
+        </p>
+        <p> 
+          Customers want guarantees nobody can actually give.
+        </p>
+
+        <p>
+          Teams align on a webinar about "the need for AI," get excited… and then realise they forgot pricing, delivery, support, or basically everything that matters after the marketing slide.
+        </p>
+
+        <h2>So what actually works?</h2>
+
+        <ul>
+          <li>Treat AI as an ecosystem play, not a logo exchange.</li>
+          <li>Co-create GTM, don't go alone when you don't have to.</li>
+          <li>Define ownership early and stick to it.</li>
+          <li>Accept that what's "best practice" today may be out-of-date by Monday.</li>
+        </ul>
+
+        <p>
+          If you're navigating this world too, happy to compare notes and exchange memos.
+        </p>
+
+        <p>
+          Bonus points if you also feel like you're assembling AI furniture without a manual. Maybe we should write one together? 😄
+        </p>
+
+        <div class="highlight-box">
+          <h3>Stay Connected</h3>
+          <p>
+            New posts will cover practical tutorials, deep dives into interesting problems, and reflections on the development process. Check back regularly for updates, or navigate to the <a href="contact.html" style="color: var(--accent-primary); text-decoration: underline;">Contact</a> page to connect with me directly.
+          </p>
+        </div>
+
+        <p>
+          Thank you for stopping by, and I hope you find the content valuable, inspiring, and perhaps even entertaining. Let's build something amazing together.
+        </p>
+      </div>
+    </article>
+  </main>
+
+  <script>
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+      const article = document.querySelector('article');
+      const progressBar = document.getElementById('progressBar');
+      
+      const articleTop = article.offsetTop;
+      const articleHeight = article.offsetHeight;
+      const windowHeight = window.innerHeight;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      const scrollableDistance = articleHeight - windowHeight;
+      const scrolled = scrollTop - articleTop;
+      const progress = Math.max(0, Math.min(100, (scrolled / scrollableDistance) * 100));
+      
+      progressBar.style.width = progress + '%';
+    });
+  </script>
+</body>
+</html>

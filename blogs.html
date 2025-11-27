@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="description" content="Play retro games created by Miska Braun - including Tetris '64 and more" />
+  <meta name="description" content="Blog posts and articles by Miska Braun" />
   <meta name="author" content="Miska Braun" />
-  <title>Games - Miska Braun</title>
+  <title>Blogs - Miska Braun</title>
   
   <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
@@ -155,7 +155,7 @@
     }
 
     /* Main Content */
-    .games-container {
+    .blogs-container {
       margin-left: 200px;
       display: flex;
       justify-content: center;
@@ -167,13 +167,13 @@
     }
 
     @media (max-width: 768px) {
-      .games-container {
+      .blogs-container {
         margin-left: 0;
         padding-bottom: 100px;
       }
     }
 
-    .games-content {
+    .blogs-content {
       max-width: 1000px;
       width: 100%;
       background: var(--card-bg);
@@ -183,7 +183,7 @@
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     }
 
-    .games-content h1 {
+    .blogs-content h1 {
       color: var(--accent-primary);
       text-align: center;
       font-size: 2.5em;
@@ -192,52 +192,62 @@
       letter-spacing: 3px;
     }
 
-    .games-grid {
+    .blogs-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2em;
       margin-top: 2em;
     }
 
-    .game-card {
+    .blog-card {
       background: rgba(255,255,255,0.08);
       border: 2px solid var(--accent-primary);
       border-radius: 15px;
       padding: 2em;
-      text-align: center;
+      text-align: left;
       transition: all 0.3s ease;
       cursor: pointer;
     }
 
-    .game-card:hover {
+    .blog-card:hover {
       transform: translateY(-10px);
       box-shadow: 0 15px 30px rgba(255, 221, 0, 0.3);
       background: rgba(255,255,255,0.15);
     }
 
-    .game-icon {
-      font-size: 4em;
+    .blog-icon {
+      width: 100%;
+      height: 150px;
       margin-bottom: 0.5em;
       display: block;
+      object-fit: cover;
+      border-radius: 8px;
     }
 
-    .game-card h2 {
+    .blog-card h2 {
       color: var(--accent-primary);
       margin-bottom: 0.5em;
       font-size: 1.5em;
     }
 
-    .game-card p {
+    .blog-date {
+      color: var(--text-secondary);
+      font-size: 0.9em;
+      margin-bottom: 1em;
+      opacity: 0.8;
+    }
+
+    .blog-card p {
       color: var(--text-secondary);
       margin-bottom: 1.5em;
       line-height: 1.6;
     }
 
-    .play-button {
+    .read-button {
       background: var(--accent-primary);
       color: var(--bg-primary);
       border: none;
-      padding: 1em 2em;
+      padding: 0.8em 1.5em;
       border-radius: 25px;
       font-size: 1em;
       font-weight: bold;
@@ -249,7 +259,7 @@
       display: inline-block;
     }
 
-    .play-button:hover {
+    .read-button:hover {
       background: var(--text-primary);
       transform: scale(1.05);
       box-shadow: 0 5px 15px rgba(255, 221, 0, 0.3);
@@ -264,20 +274,20 @@
     }
 
     @media (max-width: 768px) {
-      .games-container {
+      .blogs-container {
         padding: 1em;
         padding-bottom: 100px;
       }
 
-      .games-content {
+      .blogs-content {
         padding: 2em 1.5em;
       }
 
-      .games-content h1 {
+      .blogs-content h1 {
         font-size: 2em;
       }
 
-      .games-grid {
+      .blogs-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -290,46 +300,48 @@
     <ul>
       <li><a href="home.html">Home</a></li>
       <li><a href="freetime.html">Freetime</a></li>
-      <li><a href="blogs.html">Blogs</a></li>
+      <li><a href="blogs.html" class="current-page">Blogs</a></li>
       <li><a href="cv.html">Career</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="games.html" class="current-page">Games</a></li>
+      <li><a href="games.html">Games</a></li>
     </ul>
   </nav>
 
-  <div class="games-container">
-    <div class="games-content">
-      <h1>🎮 Retro Games</h1>
+  <div class="blogs-container">
+    <div class="blogs-content">
+      <h1>Blog Posts</h1>
       
       <div class="intro-text">
-        <p>Welcome to my collection of retro-inspired games! Built with passion for classic gaming and modern web technologies. Choose your adventure below!</p>
+        <p>Thoughts, insights, and stories from my journey in technology, life, and beyond.</p>
       </div>
 
-      <div class="games-grid">
+      <div class="blogs-grid">
         
-        <div class="game-card" onclick="window.location.href='tetris.html'">
-          <span class="game-icon">🟩</span>
-          <h2>Tetris '64</h2>
-          <p>The classic block-stacking puzzle game with retro '64 aesthetics. Clear lines, level up, and beat your high score!</p>
-          <a href="tetris.html" class="play-button">Play Now</a>
+        <div class="blog-card">
+          <img src="images/aiPartner.png" alt="AI Partnership" class="blog-icon">
+          <h2>The AI Partnership Puzzle: Assembling Without a Manual</h2>
+          <div class="blog-date">November 27, 2025</div>
+          <p>A year of AI conversations with Microsoft, GitHub, AWS, and partners. Everyone wants AI, but few are ready for the realities. From ownership chaos to GTM challenges.</p>
+          <a href="aiPartnership.html" class="read-button">Read More</a>
         </div>
 
-        <div class="game-card" onclick="window.location.href='SpaceStrike.html'">
-          <span class="game-icon">🚀</span>
-          <h2>Synthwave Void Striker</h2>
-          <p>Retro synthwave space shooter with neon aesthetics, synthesized music, and epic boss battles. Defend the galaxy!</p>
-          <a href="SpaceStrike.html" class="play-button">Play Now</a>
+        <div class="blog-card">
+          <img src="images/comingSoon.png" alt="Coming Soon" class="blog-icon">
+          <h2>Building Progressive Web Apps</h2>
+          <div class="blog-date">Coming Soon</div>
+          <p>Exploring the world of PWAs and how they're changing the way we think about web applications. From offline capabilities to native-like experiences.</p>
+          <a href="#" class="read-button">Coming Soon</a>
         </div>
 
-        <div class="game-card" style="opacity: 0.6; cursor: not-allowed;">
-          <span class="game-icon">🕹️</span>
-          <h2>More Coming Soon</h2>
-          <p>Additional retro games are in development. Stay tuned for more classic arcade experiences!</p>
-          <div class="play-button" style="background: #666; cursor: not-allowed;">Coming Soon</div>
+        <div class="blog-card">
+          <img src="images/comingSoon.png" alt="Coming Soon" class="blog-icon">
+          <h2>Game Development with JavaScript</h2>
+          <div class="blog-date">Coming Soon</div>
+          <p>My journey creating retro-style games using vanilla JavaScript. Learn about game loops, collision detection, and mobile optimization.</p>
+          <a href="#" class="read-button">Coming Soon</a>
         </div>
 
       </div>
-    </div>
   </div>
 
   <script>

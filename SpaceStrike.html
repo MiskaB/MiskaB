@@ -69,57 +69,54 @@ ens<!DOCTYPE html>
             transition: background 0.15s;
         }
 
-        /* Navigation - Force vertical layout on desktop */
+        /* Navigation */
         nav {
-            position: fixed !important;
-            top: 50% !important;
-            left: 0 !important;
-            transform: translateY(-50%) !important;
-            z-index: 1000;
-            background: var(--nav-bg);
-            border-radius: 0 10px 10px 0;
-            padding: 1em 0.5em;
-            backdrop-filter: blur(5px);
-            transition: background 0.3s;
-        }
-
-        nav:hover {
-            background: var(--nav-bg-hover);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.95);
+            padding: 2em 0;
+            z-index: 100;
+            border-right: 2px solid var(--accent-primary);
+            backdrop-filter: blur(10px);
         }
 
         nav ul {
-            list-style: none !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 1em !important;
-            align-items: center !important;
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-        nav ul li a {
-            color: var(--text-primary) !important;
-            text-decoration: none !important;
-            font-weight: bold !important;
-            writing-mode: vertical-rl !important;
-            transform: rotate(180deg) !important;
-            transition: all 0.3s ease !important;
-            font-size: 1.85rem !important;
+        nav li {
+            margin: 0.5em 0;
         }
 
-        nav ul li a:hover {
-            color: var(--accent-primary) !important;
-            font-size: 1.95rem !important;
-            transform: rotate(180deg) scale(1.00) !important;
+        nav a {
+            display: block;
+            padding: 0.75em 1.5em;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
         }
 
-        nav ul li a.current-page {
-            color: var(--accent-primary) !important;
-            text-decoration: underline !important;
+        nav a:hover {
+            background: rgba(255, 221, 0, 0.1);
+            border-left-color: var(--accent-primary);
+            padding-left: 2em;
+        }
+
+        nav a.current-page {
+            background: rgba(255, 221, 0, 0.2);
+            border-left-color: var(--accent-primary);
+            font-weight: bold;
         }
 
         /* Game Container */
         .game-container {
+            margin-left: 200px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -502,6 +499,7 @@ ens<!DOCTYPE html>
             }
 
             .game-container {
+                margin-left: 0 !important;
                 padding: 0 !important;
                 height: 100vh;
                 height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
@@ -695,7 +693,8 @@ ens<!DOCTYPE html>
         <ul>
             <li><a href="home.html">Home</a></li>
             <li><a href="freetime.html">Freetime</a></li>
-            <li><a href="cv.html">CV/Professional</a></li>
+            <li><a href="blogs.html">Blogs</a></li>
+            <li><a href="cv.html">Career</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="games.html" class="current-page">Games</a></li>
         </ul>
