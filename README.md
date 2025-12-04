@@ -4,11 +4,11 @@ Feel free to check out in graphical version here [Miska Braun's](https://miskab.
 
 I´m always interested in connecting with fellow like minded people. Currently exploring possibilities of AI and learning new things.
 
-I’m passionate about empowering environments, wiht fast, clean, and scalable digital things:
+I’m passionate about empowering environments, with fast, clean & lean, and scalable digital things:
 - Automation & infrastructure
 - Learning & experimentation
 - Remote-first, freedom-oriented mentality
-- Yesterday was a good day to start
+- Yesterday was a good day to start new things
 
 
 
