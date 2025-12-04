@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Disallow test files
+Disallow: /test_mobile_layout.html
+Disallow: /test-tetris-mobile.html
+Disallow: /tests/
+
+# Sitemap
+Sitemap: https://miskab.github.io/MiskaB/sitemap.xml
