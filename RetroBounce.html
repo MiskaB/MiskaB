@@ -667,6 +667,18 @@
 
         function resetBall() {
             isBallActive = false;
+            
+            // Ensure paddle exists
+            if (!paddle) {
+                paddle = {
+                    x: (CANVAS_WIDTH - PADDLE_WIDTH) / 2,
+                    y: CANVAS_HEIGHT - PADDLE_OFFSET_Y,
+                    width: PADDLE_WIDTH,
+                    height: PADDLE_HEIGHT,
+                    color: COLORS.paddle
+                };
+            }
+            
             ball = {
                 x: paddle.x + paddle.width / 2,
                 y: paddle.y - BALL_RADIUS - 2,
@@ -828,33 +840,39 @@
             ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
             // Draw bricks
-            bricks.forEach(b => {
-                if (b.status === 1) {
-                    ctx.fillStyle = b.color;
-                    ctx.shadowColor = b.color;
-                    ctx.shadowBlur = 10;
-                    ctx.fillRect(b.x, b.y, b.width, b.height);
-                    ctx.shadowBlur = 0;
-                }
-            });
+            if (bricks && bricks.length > 0) {
+                bricks.forEach(b => {
+                    if (b.status === 1) {
+                        ctx.fillStyle = b.color;
+                        ctx.shadowColor = b.color;
+                        ctx.shadowBlur = 10;
+                        ctx.fillRect(b.x, b.y, b.width, b.height);
+                        ctx.shadowBlur = 0;
+                    }
+                });
+            }
 
             // Draw paddle
-            ctx.fillStyle = paddle.color;
-            ctx.shadowColor = paddle.color;
-            ctx.shadowBlur = 15;
-            ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
-            ctx.shadowBlur = 0;
+            if (paddle) {
+                ctx.fillStyle = paddle.color;
+                ctx.shadowColor = paddle.color;
+                ctx.shadowBlur = 15;
+                ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+                ctx.shadowBlur = 0;
+            }
 
             // Draw ball
-            ctx.beginPath();
-            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-            ctx.fillStyle = COLORS.ball;
-            ctx.fill();
-            ctx.closePath();
+            if (ball) {
+                ctx.beginPath();
+                ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                ctx.fillStyle = COLORS.ball;
+                ctx.fill();
+                ctx.closePath();
+            }
 
             // Draw touch indicator (for mobile feedback)
             const now = Date.now();
-            if (touchIndicator.show && now - touchIndicator.timestamp < 300) {
+            if (touchIndicator.show && now - touchIndicator.timestamp < 300 && paddle) {
                 ctx.beginPath();
                 const alpha = 1 - (now - touchIndicator.timestamp) / 300;
                 ctx.arc(touchIndicator.x, paddle.y, 10, 0, Math.PI * 2);
@@ -865,7 +883,7 @@
             }
 
             // Draw "TAP TO START" if ball not active
-            if (!isBallActive && gameState === GameState.PLAYING) {
+            if (!isBallActive && gameState === GameState.PLAYING && ball) {
                 ctx.fillStyle = "white";
                 ctx.font = "16px 'Press Start 2P'";
                 ctx.textAlign = "center";
@@ -890,6 +908,7 @@
         // ========== INPUT HANDLING ==========
         function handleInput(clientX) {
             if (gameState !== GameState.PLAYING) return;
+            if (!paddle) return; // Safety check
 
             const rect = canvas.getBoundingClientRect();
             const scaleX = CANVAS_WIDTH / rect.width;
@@ -900,7 +919,7 @@
             
             paddle.x = newPaddleX;
             
-            if (!isBallActive) {
+            if (!isBallActive && ball) {
                 ball.x = newPaddleX + paddle.width / 2;
             }
         }
