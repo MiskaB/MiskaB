@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Learning Fast, Working Globally — My Thoughts on Ecosystem-Driven Business" />
+  <meta name="author" content="Miska Braun" />
+  <title>Learning Fast, Working Globally - Miska Braun</title>
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="images/AppleTouchIcon.png">
+  <meta name="theme-color" content="#ffd700">
+  
+  <style>
+    :root {
+      --bg-primary: #0a0a0a;
+      --text-primary: #ffffff;
+      --text-secondary: #e0e0e0;
+      --accent-primary: #ffdd00;
+      --accent-secondary: rgba(0,255,180,0.18);
+      --card-bg: rgba(255,255,255,0.12);
+      --highlight-bg: rgba(255,221,0,0.15);
+    }
+
+    /* Background Image Layer */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url("images/AI_2025_Sky.png") no-repeat center center;
+      background-size: cover;
+      opacity: 0.82;
+      z-index: -1;
+      filter: grayscale(70%) blur(0.1px);
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      --mouse-x: 50%;
+      --mouse-y: 50%;
+      position: relative;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--accent-secondary), transparent 60%);
+      mix-blend-mode: lighten;
+      transition: background 0.15s;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 100vh;
+      background: rgba(10, 10, 10, 0.95);
+      padding: 2em 0;
+      z-index: 100;
+      border-right: 2px solid var(--accent-primary);
+      backdrop-filter: blur(10px);
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav li {
+      margin: 0.5em 0;
+    }
+
+    nav a {
+      display: block;
+      padding: 0.75em 1.5em;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border-left: 3px solid transparent;
+    }
+
+    nav a:hover {
+      background: rgba(255, 221, 0, 0.1);
+      border-left-color: var(--accent-primary);
+      padding-left: 2em;
+    }
+
+    nav a.current-page {
+      background: rgba(255, 221, 0, 0.2);
+      border-left-color: var(--accent-primary);
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-top: 2px solid var(--accent-primary);
+        padding: 0;
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+
+      nav ul {
+        display: flex;
+        justify-content: space-around;
+        padding: 0.5em 0;
+      }
+
+      nav li {
+        margin: 0;
+        flex: 1;
+      }
+
+      nav a {
+        padding: 0.75em 0.5em;
+        text-align: center;
+        font-size: 0.85em;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+      }
+
+      nav a:hover,
+      nav a.current-page {
+        padding-left: 0.5em;
+        border-left: none;
+        border-bottom-color: var(--accent-primary);
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      nav a:hover {
+        padding-left: 0.5em;
+      }
+    }
+
+    /* Blog Container */
+    .blog-container {
+      margin-left: 200px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2em;
+      z-index: 1;
+      position: relative;
+    }
+
+    @media (max-width: 768px) {
+      .blog-container {
+        margin-left: 0;
+        padding: 1em;
+        padding-bottom: 100px;
+      }
+    }
+
+    .blog-article {
+      max-width: 900px;
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 3em;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      margin-top: 2em;
+      margin-bottom: 2em;
+    }
+
+    @media (max-width: 768px) {
+      .blog-article {
+        padding: 2em 1.5em;
+      }
+    }
+
+    .blog-header {
+      text-align: center;
+      margin-bottom: 2em;
+      padding-bottom: 2em;
+      border-bottom: 2px solid var(--accent-primary);
+    }
+
+    .blog-header h1 {
+      color: var(--accent-primary);
+      font-size: 2.5em;
+      margin-bottom: 0.5em;
+      line-height: 1.2;
+    }
+
+    @media (max-width: 768px) {
+      .blog-header h1 {
+        font-size: 1.8em;
+      }
+    }
+
+    .blog-date {
+      color: var(--text-secondary);
+      font-size: 1em;
+      opacity: 0.8;
+    }
+
+    .blog-content {
+      color: var(--text-secondary);
+      font-size: 1.1em;
+      line-height: 1.8;
+    }
+
+    .blog-content p {
+      margin-bottom: 1.5em;
+    }
+
+    .blog-content h2 {
+      color: var(--accent-primary);
+      font-size: 1.8em;
+      margin-top: 2em;
+      margin-bottom: 1em;
+      line-height: 1.3;
+    }
+
+    .blog-content h3 {
+      color: var(--accent-primary);
+      font-size: 1.4em;
+      margin-top: 1.5em;
+      margin-bottom: 0.8em;
+    }
+
+    .highlight-box {
+      background: var(--highlight-bg);
+      border-left: 4px solid var(--accent-primary);
+      padding: 1.5em;
+      margin: 2em 0;
+      border-radius: 8px;
+    }
+
+    .highlight-box p {
+      margin: 0.5em 0;
+    }
+
+    .highlight-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .principle-box {
+      background: rgba(255,255,255,0.08);
+      border: 2px solid var(--accent-primary);
+      border-radius: 12px;
+      padding: 1.5em;
+      margin: 1.5em 0;
+    }
+
+    .principle-box h4 {
+      color: var(--accent-primary);
+      font-size: 1.2em;
+      margin-top: 0;
+      margin-bottom: 0.5em;
+    }
+
+    .principle-box p {
+      margin-bottom: 0;
+    }
+
+    .section-box {
+      background: rgba(0,0,0,0.3);
+      border-radius: 10px;
+      padding: 2em;
+      margin: 2em 0;
+    }
+
+    .back-button {
+      display: inline-block;
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+      padding: 0.8em 2em;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      margin-top: 2em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .back-button:hover {
+      background: var(--text-primary);
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(255, 221, 0, 0.3);
+    }
+
+    ul {
+      margin: 1em 0;
+      padding-left: 2em;
+    }
+
+    li {
+      margin: 0.5em 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="freetime.html">Freetime</a></li>
+      <li><a href="blogs.html" class="current-page">Blogs</a></li>
+      <li><a href="cv.html">Career</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="games.html">Games</a></li>
+    </ul>
+  </nav>
+
+  <div class="blog-container">
+    <article class="blog-article">
+      
+      <header class="blog-header">
+        <h1>Learning Fast, Working Globally — My Thoughts on Ecosystem-Driven Business</h1>
+        <div class="blog-date">December 4, 2025</div>
+      </header>
+
+      <div class="blog-content">
+        
+        <div class="highlight-box">
+          <p>I have dreamt of becoming a digital nomad for a significant part of my life.
+          For me, it's a way to expand perspective while continuing to add real value in my work.</p>
+        </div>
+
+        <p>Having lived and worked in the Netherlands, Finland, Ireland and Argentina, one thing becomes obvious very quickly: cultures, both corporate and national, deeply influence how people collaborate and interact. Sometimes the differences between two EMEA countries are bigger than the gap between EMEA and the US. Understanding these nuances shapes how you build trust, resolve conflict, and align with partners and customers.</p>
+
+        <p>In partnerships, this contextual awareness can genuinely become a superpower.</p>
+
+        <h2>Why Fast Learning Matters More Than Deep Expertise</h2>
+
+        <p>I don't claim to be an expert in every technical field. Far from it. These days I rarely get access to anything that could actually break or generate a serious invoice. I work with test environments that have limits, and I don't have access to production directories.
+        But I do understand how to learn quickly when it matters.</p>
+
+        <p>This website is a good example. What started as a simple personal page has turned into an ongoing project with new features, experiments, and soon even persistent memory for returning visitors, games, leaderboards and more. Curiosity creates momentum, and momentum builds capability.</p>
+
+        <p>When I use DevSecOps as an example, it's not because I'm an expert or pretending to be one. It's simply to illustrate how I would approach becoming knowledgeable in a complex, multi-vendor domain with many partners involved.</p>
+
+        <h2>Example Framework: How I Would Approach a DevSecOps Partner Ecosystem</h2>
+
+        <div class="section-box">
+          <h3>Start with platform, industry and context fundamentals</h3>
+          
+          <p>Understand the security, development and deployment models across major cloud platforms and providers.
+          Not to master every detail, but to know how they differ, where risks emerge and how customers build on top of them. Hyperscaler case studies alone offer a crash course in modern architectures.</p>
+        </div>
+
+        <div class="section-box">
+          <h3>Map the ecosystem instead of memorising tools</h3>
+          
+          <p>Almost every domain has clear categories or solution areas. In DevSecOps, for example, concepts like code security, artifact management, threat detection, workload protection, governance and automation often appear.</p>
+
+          <p>From these, you need to understand:</p>
+
+          <ul>
+            <li>what problems each category solves</li>
+            <li>how organisations typically combine them</li>
+            <li>where friction or gaps tend to appear</li>
+          </ul>
+
+          <p>Vendors will change. Categories rarely do. Sometimes new categories emerge, or existing ones split into niche areas where specific partners excel.</p>
+        </div>
+
+        <div class="section-box">
+          <h3>Operate with a few core rules</h3>
+          
+          <p>These guide how I engage with partners and colleagues across cross-functional work.</p>
+
+          <div class="principle-box">
+            <h4>Transparency</h4>
+            <p>Be explicit about the outcomes we want, the goals we're chasing and the ambitions behind them.</p>
+          </div>
+
+          <div class="principle-box">
+            <h4>Clear communication</h4>
+            <p>Clarity isn't the same as directness. Directness without clarity is just rude. Clarity means stating what we are strong at, where we're not strong, and where we need alignment or help.</p>
+          </div>
+
+          <div class="principle-box">
+            <h4>Responsibility</h4>
+            <p>Agree early on who owns what, in what order and in which situations. If this isn't defined up front, things get messy later and people start stepping on each other's toes.</p>
+          </div>
+
+          <p>These principles tend to work across any ecosystem because partnerships aren't linear and almost never zero-sum. If a partnership operates as a zero-sum game, it usually isn't a solid foundation to begin with.</p>
+
+          <p>Priorities shift. Roadmaps change. AI accelerates everything, especially technology and partnerships.
+          If you can't adjust, shift focus and prioritise accordingly, you can't lead.</p>
+        </div>
+
+        <h2>Why These Skills Travel Between Ecosystems</h2>
+
+        <p>Partner ecosystems share similar mechanics whether you're in DevOps, DevSecOps, cloud, AI, SaaS, distributor models or ISV business.</p>
+
+        <p>You nearly always need to understand how customers assemble solutions, align value across multiple tools or technologies and balance commercial and technical priorities.</p>
+
+        <p>I've moved from IBM subscription services to distribution, then to software management, cloud infrastructure and now software development. The context changed, the roles shifted, but the logic stayed the same.</p>
+
+        <h2>So Why the Nomadic Life?</h2>
+
+        <p>People often ask what drives me toward this fairly nomadic way of working.
+        For me, working globally isn't about escapism. It's about gaining more lenses through which to interpret behaviour, business priorities and collaboration styles.</p>
+
+        <p>When you've experienced different ways of working — from Nordic solitude and singularity to Dutch pragmatism and directness to Latin American relationship-driven business culture — you don't just manage partnerships. You understand them.</p>
+
+        <div class="highlight-box">
+          <p>This mindset has driven me forward for a long time.
+          It's about continuing to build adaptable, culturally aware and ecosystem-centric ways of creating value in a world developing faster than ever.</p>
+        </div>
+
+        <a href="blogs.html" class="back-button">← Back to Blogs</a>
+      </div>
+
+    </article>
+  </div>
+
+  <script>
+    // Mouse tracking for background effect
+    document.addEventListener("mousemove", (e) => {
+      const x = (e.clientX / window.innerWidth) * 100 + "%";
+      const y = (e.clientY / window.innerHeight) * 100 + "%";
+      document.body.style.setProperty("--mouse-x", x);
+      document.body.style.setProperty("--mouse-y", y);
+    });
+  </script>
+
+</body>
+</html>
