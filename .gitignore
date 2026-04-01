@@ -72,6 +72,9 @@ jest-coverage/
 *.backup
 *~
 
+# Local migration plan (do not commit)
+AZURE_MIGRATION_PLAN.md
+
 # Lock files (optional - you may want to keep package-lock.json)
 # Uncomment the next line if you want to ignore lock files
 # *.lock
