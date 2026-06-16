@@ -67,13 +67,14 @@
 
     body {
       font-family: Arial, sans-serif;
-      color: var(--text-primary);
-      position: relative;
-      background-color: var(--bg-primary);
-      --mouse-x: 50%;
-      --mouse-y: 50%;
       margin: 0;
       padding: 0;
+      line-height: 1.6;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      --mouse-x: 50%;
+      --mouse-y: 50%;
+      position: relative;
     }
     body::after {
       content: "";
@@ -220,9 +221,6 @@
       section {
         margin-left: 0;
         padding-bottom: 100px;
-      }
-    }
-      section {
         flex-direction: column;
         align-items: flex-start;
         padding: 2em 1em;
@@ -361,13 +359,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    /* Current Page Highlight */
-    .current-page a {
-      color: #ffd700;
-      font-size: 1.95rem;
-      transform: rotate(180deg) scale(1.00);
-    }
-  </style>
+</style>
 </head>
 <body>
 
