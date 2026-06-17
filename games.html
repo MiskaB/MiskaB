@@ -285,6 +285,24 @@
       line-height: 1.8;
     }
 
+    footer {
+      text-align: center;
+      padding: 2em;
+      background-color: var(--card-bg);
+      border-top: 1px solid var(--text-secondary);
+      color: var(--text-primary);
+      margin-left: 200px;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      footer {
+        margin-left: 0;
+        margin-bottom: 80px;
+      }
+    }
+
     @media (max-width: 768px) {
       .games-container {
         padding: 1em;
@@ -353,6 +371,10 @@
       </div>
     </div>
   </div>
+
+  <footer>
+    <p>&copy; 2025 Miska Braun</p>
+  </footer>
 
   <script>
     // Mouse tracking for background effect

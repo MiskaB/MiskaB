@@ -253,6 +253,24 @@
       transform: scale(1.02);
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
+
+    footer {
+      text-align: center;
+      padding: 2em;
+      background-color: var(--card-bg);
+      border-top: 1px solid var(--text-secondary);
+      color: var(--text-primary);
+      margin-left: 200px;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      footer {
+        margin-left: 0;
+        margin-bottom: 80px;
+      }
+    }
   </style>
 </head>
 <body>
