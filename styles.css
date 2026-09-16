@@ -295,3 +295,15 @@ body.light-mode nav a:hover {
 body.light-mode footer {
   border-top-color: rgba(0, 0, 0, 0.15);
 }
+
+/* --- Nav wave animation (home page, post-scroll) ----------- */
+@keyframes nav-wave-glow {
+  0%   { color: var(--text-primary); background: transparent; text-shadow: none; }
+  38%  { color: var(--accent-primary); background: rgba(255, 221, 0, 0.22);
+         text-shadow: 0 0 10px rgba(255, 221, 0, 0.6); }
+  100% { color: var(--text-primary); background: transparent; text-shadow: none; }
+}
+
+nav a.nav-wave {
+  animation: nav-wave-glow 0.65s ease-in-out forwards;
+}

@@ -85,6 +85,7 @@
       section {
         margin-left: 0;
         margin-bottom: 80px;
+        padding: 1.5em 1em;
       }
     }
 
@@ -108,6 +109,51 @@
 
     section#about p {
       flex: 1;
+    }
+
+    @media (max-width: 768px) {
+      section#about {
+        flex-direction: column-reverse;
+        align-items: stretch;
+        gap: 0.5em;
+      }
+
+      section#about img {
+        width: 55%;
+        max-width: 200px;
+        margin: 0.5em auto 0;
+        display: block;
+      }
+
+      section#about p {
+        font-size: 0.95em;
+        line-height: 1.7;
+      }
+    }
+
+    /* Scroll hint arrow */
+    .scroll-hint {
+      position: absolute;
+      bottom: 1.5em;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 2rem;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      animation: hint-bounce 1.4s ease-in-out infinite;
+    }
+
+    .scroll-hint.visible {
+      opacity: 1;
+    }
+
+    @keyframes hint-bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(10px); }
     }
   </style>
 </head>
@@ -194,6 +240,107 @@
       img.style.setProperty('--final-y', `${baseY + offsetY}px`);
       img.style.animationDelay = `${i * 0.25}s`;
     });
+  </script>
+
+  <script>
+    // Auto-scroll to #about and pull-back when user scrolls into the images area
+    (function () {
+      var flyingEl = document.querySelector('.flying-images');
+      var aboutEl = document.getElementById('about');
+      if (!flyingEl || !aboutEl) return;
+
+      // Inject bouncing scroll-hint arrow
+      var hint = document.createElement('div');
+      hint.className = 'scroll-hint';
+      hint.textContent = '↓'; // ↓
+      flyingEl.appendChild(hint);
+
+      var hasInitialScrolled = false;
+      var isProgrammatic = false;
+      var pullbackTimer = null;
+      var lastScrollAt = 0;
+      var PULLBACK_DELAY = 1800;  // ms to wait before pulling user back
+      var COOLDOWN = 3000;        // min ms between scroll actions
+
+      // Cascade a golden glow forward then back through each nav link
+      function triggerNavWave() {
+        var navLinks = Array.from(document.querySelectorAll('nav a'));
+        var STAGGER = 130;   // ms between each link
+        var ANIM    = 650;   // matches CSS animation duration
+        var forwardEnd = (navLinks.length - 1) * STAGGER + ANIM;
+
+        function animLink(link, delay) {
+          setTimeout(function () {
+            link.classList.add('nav-wave');
+            link.addEventListener('animationend', function () {
+              link.classList.remove('nav-wave');
+            }, { once: true });
+          }, delay);
+        }
+
+        // Forward: Home → Games
+        navLinks.forEach(function (link, i) {
+          animLink(link, i * STAGGER);
+        });
+
+        // Backward: Games → Home (starts 180ms after forward finishes)
+        navLinks.slice().reverse().forEach(function (link, i) {
+          animLink(link, forwardEnd + 180 + i * STAGGER);
+        });
+      }
+
+      function scrollToAbout() {
+        if (isProgrammatic) return;
+        isProgrammatic = true;
+        lastScrollAt = Date.now();
+        hint.classList.remove('visible');
+        aboutEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Fire nav wave once scroll animation finishes (~1.2s)
+        setTimeout(function () {
+          isProgrammatic = false;
+          triggerNavWave();
+        }, 1200);
+      }
+
+      // Show hint shortly after images begin appearing
+      setTimeout(function () { hint.classList.add('visible'); }, 1500);
+
+      // Initial auto-scroll: just before the last image lands (at ~3.2s)
+      // Last image: delay 1.25s + duration 2.5s = lands at 3.75s
+      setTimeout(function () {
+        hasInitialScrolled = true;
+        scrollToAbout();
+      }, 3200);
+
+      // Pull-back: when user scrolls back up into the images area
+      var observer = new IntersectionObserver(function (entries) {
+        var entry = entries[0];
+
+        // Ignore during initial animation or programmatic scrolls
+        if (!hasInitialScrolled || isProgrammatic) {
+          clearTimeout(pullbackTimer);
+          return;
+        }
+
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.45) {
+          // Show hint as a gentle nudge while user looks at photos
+          hint.classList.add('visible');
+
+          // Respect cooldown — user may have just arrived here
+          if (Date.now() - lastScrollAt < COOLDOWN) return;
+
+          clearTimeout(pullbackTimer);
+          pullbackTimer = setTimeout(function () {
+            scrollToAbout();
+          }, PULLBACK_DELAY);
+        } else {
+          clearTimeout(pullbackTimer);
+          if (!entry.isIntersecting) hint.classList.remove('visible');
+        }
+      }, { threshold: [0, 0.2, 0.45, 0.7, 1] });
+
+      observer.observe(flyingEl);
+    })();
   </script>
 
 </body>
