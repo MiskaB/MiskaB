@@ -634,6 +634,80 @@
       grid-row: 1;
     }
 
+    /* Leaderboard panel */
+    .leaderboard-title {
+      color: var(--accent-primary);
+      text-align: center;
+      font-size: 1em;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin: 1.2em 0 0.5em;
+    }
+
+    .leaderboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.72em;
+    }
+
+    .leaderboard-table th {
+      color: var(--accent-primary);
+      text-align: left;
+      padding: 0.3em 0.2em;
+      border-bottom: 1px solid rgba(255, 221, 0, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .leaderboard-table td {
+      padding: 0.3em 0.2em;
+      color: var(--text-secondary);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      white-space: nowrap;
+    }
+
+    .leaderboard-table tr.gold td { color: var(--accent-primary); font-weight: bold; }
+    .leaderboard-table .rank { opacity: 0.5; text-align: right; padding-right: 0.4em; }
+
+    /* Name entry in game-over overlay */
+    .new-highscore-badge {
+      color: var(--accent-primary);
+      font-weight: bold;
+      font-size: 1.1em;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.4em;
+      animation: pulse 0.8s ease-in-out infinite;
+    }
+
+    .name-entry { margin: 0.8em 0; }
+
+    .name-entry label {
+      display: block;
+      color: var(--text-secondary);
+      font-size: 0.85em;
+      margin-bottom: 0.4em;
+    }
+
+    .name-entry input {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid var(--accent-primary);
+      border-radius: 5px;
+      color: var(--text-primary);
+      font-size: 1.8em;
+      font-weight: bold;
+      text-align: center;
+      width: 3.2em;
+      padding: 0.2em 0.3em;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+    }
+
+    .name-entry input:focus {
+      outline: none;
+      box-shadow: 0 0 12px rgba(255, 221, 0, 0.5);
+    }
+
   </style>
 </head>
 <body>
@@ -691,17 +765,25 @@
         </div>
       </div>
 
-      <!-- Right Panel: Next Piece -->
+      <!-- Right Panel: Next Piece + Leaderboard -->
       <div class="side-panel">
         <h3>Next Piece</h3>
         <canvas id="nextCanvas" width="120" height="120" class="next-piece"></canvas>
-        
-        <div class="instructions">
-          <h4>How to Play:</h4>
-          <p>Complete horizontal lines to clear them and score points.</p>
-          <p>Game speeds up as you progress through levels.</p>
-          <p>Don't let the pieces reach the top!</p>
-        </div>
+
+        <h3 class="leaderboard-title">Top 10</h3>
+        <table class="leaderboard-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Score</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body">
+            <tr><td colspan="4" style="text-align:center;opacity:0.4;padding:0.6em 0;">Loading...</td></tr>
+          </tbody>
+        </table>
       </div>
 
     </div>
@@ -1156,22 +1238,119 @@
       }
     }
 
+    // ── Leaderboard API ──────────────────────────────────────────
+    const WORKER_URL = 'https://miskab-leaderboard.miskableaderboard.workers.dev';
+
+    async function fetchLeaderboard() {
+      try {
+        const res = await fetch(WORKER_URL + '/scores?game=tetris');
+        if (!res.ok) throw new Error('fetch failed');
+        const data = await res.json();
+        renderLeaderboard(data);
+        return data;
+      } catch (e) {
+        renderLeaderboard([]);
+        return [];
+      }
+    }
+
+    function renderLeaderboard(scores) {
+      const tbody = document.getElementById('leaderboard-body');
+      if (!tbody) return;
+      if (!scores || !scores.length) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;opacity:0.4;padding:0.6em 0;">No scores yet!</td></tr>';
+        return;
+      }
+      tbody.innerHTML = scores.map(function (s, i) {
+        const d = new Date(s.created_at);
+        const dateStr = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+        return '<tr class="' + (i === 0 ? 'gold' : '') + '">' +
+          '<td class="rank">' + (i + 1) + '</td>' +
+          '<td style="font-weight:bold">' + s.player + '</td>' +
+          '<td>' + Number(s.score).toLocaleString() + '</td>' +
+          '<td style="opacity:0.55;font-size:0.85em">' + dateStr + '</td>' +
+          '</tr>';
+      }).join('');
+    }
+
+    async function submitScore(player, score) {
+      try {
+        const res = await fetch(WORKER_URL + '/scores', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ game: 'tetris', player: player, score: score })
+        });
+        return res.ok;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function qualifiesForLeaderboard(score, board) {
+      if (!score) return false;
+      if (board.length < 10) return true;
+      return score > board[board.length - 1].score;
+    }
+
+    function showPlayAgain(container, score) {
+      container.innerHTML =
+        '<h2>Game Over!</h2>' +
+        '<div class="final-score">Final Score: ' + score + '</div>' +
+        '<button class="control-button" onclick="this.parentElement.remove(); resetGame();">Play Again</button>';
+    }
+
     // Game over
     function gameOver() {
       game.gameRunning = false;
       document.getElementById('startBtn').disabled = false;
       document.getElementById('pauseBtn').disabled = true;
-      
-      // Show game over message
-      const gameOverDiv = document.createElement('div');
+
+      const finalScore = game.score;
+
+      var gameOverDiv = document.createElement('div');
       gameOverDiv.className = 'game-over';
-      gameOverDiv.innerHTML = `
-        <h2>Game Over!</h2>
-        <div class="final-score">Final Score: ${game.score}</div>
-        <button class="control-button" onclick="this.parentElement.remove(); resetGame();">Play Again</button>
-      `;
       gameOverDiv.style.display = 'block';
       document.querySelector('.game-board').appendChild(gameOverDiv);
+
+      fetchLeaderboard().then(function (board) {
+        if (!qualifiesForLeaderboard(finalScore, board)) {
+          showPlayAgain(gameOverDiv, finalScore);
+          return;
+        }
+
+        gameOverDiv.innerHTML =
+          '<h2>Game Over!</h2>' +
+          '<div class="final-score">Score: ' + finalScore + '</div>' +
+          '<div class="new-highscore-badge">&#9733; Top 10! &#9733;</div>' +
+          '<div class="name-entry">' +
+            '<label>Enter your 3-letter name:</label>' +
+            '<input id="playerName" type="text" maxlength="3" placeholder="AAA" autocomplete="off" />' +
+          '</div>' +
+          '<button class="control-button" id="submitNameBtn">Submit</button>' +
+          '<button class="control-button" id="skipNameBtn">Skip</button>';
+
+        var nameInput = document.getElementById('playerName');
+        nameInput.focus();
+
+        nameInput.addEventListener('input', function () {
+          this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+        });
+
+        nameInput.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') document.getElementById('submitNameBtn').click();
+        });
+
+        document.getElementById('submitNameBtn').addEventListener('click', function () {
+          var name = nameInput.value.trim().toUpperCase();
+          if (!name) { nameInput.focus(); return; }
+          submitScore(name, finalScore).then(function () { fetchLeaderboard(); });
+          showPlayAgain(gameOverDiv, finalScore);
+        });
+
+        document.getElementById('skipNameBtn').addEventListener('click', function () {
+          showPlayAgain(gameOverDiv, finalScore);
+        });
+      });
     }
 
     // Game loop
@@ -1344,6 +1523,7 @@
     // Initialize game when page loads
     window.addEventListener('load', () => {
       initGame();
+      fetchLeaderboard();
     });
   </script>
 

@@ -1,0 +1,8 @@
+name = "miskab-leaderboard"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "highscoresdatabasemaster"
+database_id   = "dbddf7c7-740d-42a1-b434-0c1fe2292c78"

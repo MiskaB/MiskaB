@@ -1,3 +1,6 @@
+# Wrangler local dev cache (auth lives in ~/.wrangler, not here)
+.wrangler/
+
 # Dependencies
 node_modules/
 npm-debug.log*
