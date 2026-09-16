@@ -121,6 +121,30 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
+    .contact-form.form-sent input,
+    .contact-form.form-sent textarea {
+      background: rgba(100, 100, 100, 0.15) !important;
+      color: rgba(180, 180, 180, 0.6) !important;
+      border-color: rgba(128, 128, 128, 0.25) !important;
+      cursor: not-allowed;
+    }
+
+    .contact-form.form-sent button {
+      background: rgba(128, 128, 128, 0.35) !important;
+      color: rgba(180, 180, 180, 0.6) !important;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    #form-status {
+      margin-top: 0.8em;
+      font-size: 1em;
+      text-align: center;
+      font-weight: bold;
+      min-height: 1.4em;
+    }
+
     footer {
       margin-left: 200px;
     }
@@ -131,29 +155,24 @@
   <nav id="site-nav"></nav>
 
   <section id="contact">
-    <div class="contact-form">
-      <div data-fs-success style="display:none; text-align:center; padding:1em 0;">
-        <p style="color:#00cc77; font-weight:bold; font-size:1em;">Message sent! I will get back to you soon.</p>
-      </div>
-
+    <div class="contact-form" id="contact-card">
       <form id="contact-form">
-        <h2>Contact Miska</h2>
-        <div data-fs-error style="color:#ff6b6b; font-size:0.9em; margin-bottom:0.5em;"></div>
-
         <!-- Honeypot: bots fill this, humans don't — Formspree silently drops it -->
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 
+        <h2>Contact Miska</h2>
+
         <label for="name">Name</label>
-        <input id="name" name="name" type="text" autocomplete="name" required data-fs-field />
+        <input id="name" name="name" type="text" autocomplete="name" required />
 
         <label for="email">Email</label>
-        <input id="email" name="email" type="email" autocomplete="email" required data-fs-field />
-        <span data-fs-error="email" style="color:#ff6b6b; font-size:0.85em; display:block; margin-top:-0.5em; margin-bottom:0.4em;"></span>
+        <input id="email" name="email" type="email" autocomplete="email" required />
 
         <label for="message">Message</label>
-        <textarea id="message" name="message" rows="3" required data-fs-field></textarea>
+        <textarea id="message" name="message" rows="3" required></textarea>
 
-        <button type="submit" data-fs-submit-btn>Send</button>
+        <button type="submit" id="submit-btn">Send</button>
+        <p id="form-status"></p>
       </form>
     </div>
   </section>
@@ -162,12 +181,51 @@
     <p>&copy; <span class="copyright-year">2025</span> Miska Braun</p>
   </footer>
 
+  <script src="shared.js"></script>
   <script>
-    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-    formspree('initForm', { formElement: '#contact-form', formId: 'xkjgwpko' });
+    (function () {
+      const form = document.getElementById('contact-form');
+      const card = document.getElementById('contact-card');
+      const statusEl = document.getElementById('form-status');
+      const submitBtn = document.getElementById('submit-btn');
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        statusEl.textContent = '';
+        statusEl.style.color = '';
+
+        try {
+          const res = await fetch('https://formspree.io/f/xkjgwpko', {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            form.querySelectorAll('input:not([name="_gotcha"]), textarea').forEach(function (el) {
+              el.disabled = true;
+            });
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sent';
+            card.classList.add('form-sent');
+            statusEl.textContent = 'Thank you!';
+            statusEl.style.color = '#00cc77';
+          } else {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send';
+            statusEl.textContent = 'Something went wrong. Please try again.';
+            statusEl.style.color = '#ff6b6b';
+          }
+        } catch (err) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send';
+          statusEl.textContent = 'Network error. Please try again.';
+          statusEl.style.color = '#ff6b6b';
+        }
+      });
+    })();
   </script>
-  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
-  <script src="shared.js" defer></script>
 
 </body>
 </html>
