@@ -7,176 +7,40 @@
   <meta name="author" content="Miska Braun" />
   <meta name="keywords" content="Miska Braun, Portfolio, Developer, Partner Management, Digital Nomad, Technology" />
   <title>Home - Miska Braun | Not really nerd, just curious about life</title>
-  
+
   <!-- Canonical URL -->
   <link rel="canonical" href="https://miskab.github.io/MiskaB/home.html">
-  
-  <!-- Open Graph / Facebook -->
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://miskab.github.io/MiskaB/home.html">
   <meta property="og:title" content="Miska Braun - Developer & Partner Manager">
   <meta property="og:description" content="Explore the personal and professional portfolio of Miska Braun - Developer, Partner Manager, and Digital Nomad.">
   <meta property="og:image" content="https://miskab.github.io/MiskaB/images/Profile_2025.jpeg">
-  
+
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://miskab.github.io/MiskaB/home.html">
   <meta property="twitter:title" content="Miska Braun - Developer & Partner Manager">
   <meta property="twitter:description" content="Explore the personal and professional portfolio of Miska Braun - Developer, Partner Manager, and Digital Nomad.">
   <meta property="twitter:image" content="https://miskab.github.io/MiskaB/images/Profile_2025.jpeg">
-  
+
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="images/AppleTouchIcon.png">
   <link rel="shortcut icon" href="images/AppleTouchIcon.png">
-  
-  <!-- PWA Manifest -->
+
+  <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="images/AppleTouchIcon.png">
   <meta name="theme-color" content="#ffd700">
-  
+
+  <!-- Preload hero background -->
+  <link rel="preload" as="image" href="images/AI_2025_Sky.png">
+
+  <!-- Shared styles -->
+  <link rel="stylesheet" href="styles.css">
+
   <style>
-    :root {
-      /* Dark theme - Enhanced contrast */
-      --bg-primary: #0a0a0a;
-      --text-primary: #ffffff;
-      --text-secondary: #e0e0e0;
-      --accent-primary: #ffdd00;
-      --accent-secondary: rgba(0,255,180,0.18);
-      --nav-bg: rgba(0, 0, 0, 0.8);
-      --nav-bg-hover: rgba(0, 0, 0, 0.95);
-      --card-bg: rgba(255,255,255,0.12);
-      --card-bg-secondary: rgba(255,255,255,0.18);
-    }
-
-    /* Background Image Layer */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: url("images/AI_2025_Sky.png") no-repeat center center;
-      background-size: cover;
-      opacity: 0.82;
-      z-index: -1;
-      filter: grayscale(70%) blur(0.1px);
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      --mouse-x: 50%;
-      --mouse-y: 50%;
-      position: relative;
-    }
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--accent-secondary), transparent 60%);
-      mix-blend-mode: lighten;
-      transition: background 0.15s;
-    }
-
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 200px;
-      height: 100vh;
-      background: rgba(10, 10, 10, 0.95);
-      padding: 2em 0;
-      z-index: 100;
-      border-right: 2px solid var(--accent-primary);
-      backdrop-filter: blur(10px);
-    }
-
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    nav li {
-      margin: 0.5em 0;
-    }
-
-    nav a {
-      display: block;
-      padding: 0.75em 1.5em;
-      color: var(--text-primary);
-      text-decoration: none;
-      transition: all 0.3s ease;
-      border-left: 3px solid transparent;
-    }
-
-    nav a:hover {
-      background: rgba(255, 221, 0, 0.1);
-      border-left-color: var(--accent-primary);
-      padding-left: 2em;
-    }
-
-    nav a.current-page {
-      background: rgba(255, 221, 0, 0.2);
-      border-left-color: var(--accent-primary);
-      font-weight: bold;
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        position: fixed;
-        top: auto;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: auto;
-        border-right: none;
-        border-top: 2px solid var(--accent-primary);
-        padding: 0;
-        padding-bottom: env(safe-area-inset-bottom);
-      }
-
-      nav ul {
-        display: flex;
-        justify-content: space-around;
-        padding: 0.5em 0;
-      }
-
-      nav li {
-        margin: 0;
-        flex: 1;
-      }
-
-      nav a {
-        padding: 0.75em 0.5em;
-        text-align: center;
-        font-size: 0.85em;
-        border-left: none;
-        border-bottom: 3px solid transparent;
-      }
-
-      nav a:hover,
-      nav a.current-page {
-        padding-left: 0.5em;
-        border-left: none;
-        border-bottom-color: var(--accent-primary);
-      }
-    }
-
-    @media (hover: none) and (pointer: coarse) {
-      nav a:hover {
-        padding-left: 0.5em;
-      }
-    }
-
     .flying-images {
       position: relative;
       width: 100vw;
@@ -224,33 +88,9 @@
       }
     }
 
-    h2 {
-      color: var(--text-primary);
-      border-bottom: 2px solid var(--text-secondary);
-      padding-bottom: 0.5em;
-    }
-
     img {
       max-width: 100%;
       margin: 1em 0;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2em;
-      background-color: var(--card-bg);
-      margin-top: 2em;
-      border-top: 1px solid var(--text-secondary);
-      color: var(--text-primary);
-    }
-
-    a {
-      color: var(--accent-primary);
-      font-weight: bold;
-    }
-
-    a:hover {
-      color: var(--text-primary);
     }
 
     section#about {
@@ -273,62 +113,52 @@
 </head>
 <body>
 
-  <!-- Left-hand Vertical Navigation -->
-  <nav>
-    <ul>
-      <li><a href="home.html" class="current-page">Home</a></li>
-      <li><a href="freetime.html">Freetime</a></li>
-      <li><a href="blogs.html">Blogs</a></li>
-      <li><a href="cv.html">Career</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="games.html">Games</a></li>
-    </ul>
-  </nav>
+  <nav id="site-nav"></nav>
 
   <div class="flying-images">
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Profile_2025.jpeg" alt="Profile 2025" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/MSFT_2025.jpeg" alt="Microsoft 2025" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/GitHub_logo.jpeg" alt="GitHub Logo" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/GitHub_cap.jpeg" alt="GitHub Cap" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Octocat_team.jpeg" alt="Octocat Team" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Kris_and_Miska.jpeg" alt="Kris and Miska" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Bumblebee.jpeg" alt="Bumblebee" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Berries.jpeg" alt="Berries" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Ready_to_leave_office.jpeg" alt="Ready to Leave Office" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/AWS_Sum_2024.jpeg" alt="AWS Summit 2024" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Copilot_WS_2024.jpeg" alt="Copilot Workshop 2024" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/travel.jpg" alt="Travel" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/GH_Uni_2024_2.jpeg" alt="GitHub Universe 2024" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Crayon_2019.jpeg" alt="Crayon 2019" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/miska_2019_crayon.jpeg" alt="Miska 2019 Crayon" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/icehockey.jpg" alt="Ice Hockey" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/GH_Uni_2023.jpeg" alt="GitHub Universe 2023" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/car.jpg" alt="Car" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/th.jpeg" alt="TH" />
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/profile2.jpeg" alt="Profile 2" />
+    <img src="images/Profile_2025.jpeg"           alt="Profile 2025"          loading="lazy" />
+    <img src="images/MSFT_2025.jpeg"              alt="Microsoft 2025"        loading="lazy" />
+    <img src="images/GitHub_logo.jpeg"            alt="GitHub Logo"           loading="lazy" />
+    <img src="images/GitHub_cap.jpeg"             alt="GitHub Cap"            loading="lazy" />
+    <img src="images/Octocat_team.jpeg"           alt="Octocat Team"          loading="lazy" />
+    <img src="images/Kris_and_Miska.jpeg"         alt="Kris and Miska"        loading="lazy" />
+    <img src="images/Bumblebee.jpeg"              alt="Bumblebee"             loading="lazy" />
+    <img src="images/Berries.jpeg"                alt="Berries"               loading="lazy" />
+    <img src="images/Ready_to_leave_office.jpeg"  alt="Ready to Leave Office" loading="lazy" />
+    <img src="images/AWS_Sum_2024.jpeg"           alt="AWS Summit 2024"       loading="lazy" />
+    <img src="images/Copilot_WS_2024.jpeg"        alt="Copilot Workshop 2024" loading="lazy" />
+    <img src="images/travel.jpg"                  alt="Travel"                loading="lazy" />
+    <img src="images/GH_Uni_2024_2.jpeg"          alt="GitHub Universe 2024"  loading="lazy" />
+<img src="images/miska_2019_crayon.jpeg"      alt="Miska 2019 Crayon"     loading="lazy" />
+    <img src="images/icehockey.jpg"               alt="Ice Hockey"            loading="lazy" />
+    <img src="images/GH_Uni_2023.jpeg"            alt="GitHub Universe 2023"  loading="lazy" />
+    <img src="images/car.jpg"                     alt="Car"                   loading="lazy" />
+    <img src="images/th.jpeg"                     alt="TH"                    loading="lazy" />
+    <img src="images/profile2.jpeg"               alt="Profile 2"             loading="lazy" />
   </div>
 
   <section id="about">
-    <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/profile2.jpeg" alt="Alternate Profile Picture" />
+    <img src="images/profile2.jpeg" alt="Alternate Profile Picture" loading="lazy" />
     <p>
-      👋 Hello! I’m <strong>Miska Braun</strong> — a technology enthusiast with a passion for 🌩️ cloud innovation, 🌱 sustainability, and 🌍 connecting with people across borders and cultures.
+      👋 Hello! I'm <strong>Miska Braun</strong> — a technology enthusiast with a passion for 🌩️ cloud innovation, 🌱 sustainability, and 🌍 connecting with people across borders and cultures.
       <br /><br />
       This website — or my <em>online wall</em> — is a personal portfolio showcasing my professional journey, interests, and growth. Head over to the <strong>CV/Professional</strong> section to dive deeper into my background and experience.
       <br /><br />
-      I strongly believe in the power of combining technology 🤖 with people 🧑‍🤝‍🧑 to make a real difference. 
+      I strongly believe in the power of combining technology 🤖 with people 🧑‍🤝‍🧑 to make a real difference.
       <br />
-      In the <strong>Freetime</strong> section, you’ll find things that matter to me — some tech-driven, some purely human, and all driven by ❤️ passion and time.
+      In the <strong>Freetime</strong> section, you'll find things that matter to me — some tech-driven, some purely human, and all driven by ❤️ passion and time.
       <br /><br />
-      Want to get in touch? Reach out via <a href="https://www.linkedin.com/in/miskabraun/" target="_blank">LinkedIn</a> — I’d love to connect!
+      Want to get in touch? Reach out via <a href="https://www.linkedin.com/in/miskabraun/" target="_blank">LinkedIn</a> — I'd love to connect!
       <br /><br />
       "Cut the crap and land that fucking plane!" — <em>Captain Sully</em>
     </p>
   </section>
 
   <footer>
-    <p>&copy; 2025 Miska Braun</p>
+    <p>&copy; <span class="copyright-year">2025</span> Miska Braun</p>
   </footer>
 
+  <script src="shared.js"></script>
   <script>
     const images = document.querySelectorAll('.flying-images img');
     const container = document.querySelector('.flying-images');
@@ -356,21 +186,10 @@
       const [baseX, baseY] = spots[i];
       const offsetX = (Math.random() - 0.5) * 30;
       const offsetY = (Math.random() - 0.5) * 30;
-      const finalX = baseX + offsetX;
-      const finalY = baseY + offsetY;
-      const startX = Math.random() * containerWidth;
-
-      img.style.setProperty('--start-x', `${startX}px`);
-      img.style.setProperty('--final-x', `${finalX}px`);
-      img.style.setProperty('--final-y', `${finalY}px`);
+      img.style.setProperty('--start-x', `${Math.random() * containerWidth}px`);
+      img.style.setProperty('--final-x', `${baseX + offsetX}px`);
+      img.style.setProperty('--final-y', `${baseY + offsetY}px`);
       img.style.animationDelay = `${i * 0.25}s`;
-    });
-
-    document.addEventListener("mousemove", (e) => {
-      const x = (e.clientX / window.innerWidth) * 100 + "%";
-      const y = (e.clientY / window.innerHeight) * 100 + "%";
-      document.body.style.setProperty("--mouse-x", x);
-      document.body.style.setProperty("--mouse-y", y);
     });
   </script>
 

@@ -51,143 +51,15 @@
   }
   </script>
 
+  <!-- Preload hero background -->
+  <link rel="preload" as="image" href="images/AI_2025_Sky.png">
+
+  <!-- Shared styles -->
+  <link rel="stylesheet" href="styles.css">
+
   <style>
     :root {
-      --bg-primary: #0a0a0a;
-      --text-primary: #ffffff;
-      --text-secondary: #e0e0e0;
-      --accent-primary: #ffdd00;
-      --accent-secondary: rgba(0,255,180,0.18);
-      --card-bg: rgba(255,255,255,0.12);
-      --highlight-bg: rgba(255,221,0,0.15);
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: url("images/AI_2025_Sky.png") no-repeat center center;
-      background-size: cover;
-      opacity: 0.82;
-      z-index: -1;
-      filter: grayscale(70%) blur(0.1px);
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      --mouse-x: 50%;
-      --mouse-y: 50%;
-      position: relative;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--accent-secondary), transparent 60%);
-      mix-blend-mode: lighten;
-      transition: background 0.15s;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 200px;
-      height: 100vh;
-      background: rgba(10, 10, 10, 0.95);
-      padding: 2em 0;
-      z-index: 100;
-      border-right: 2px solid var(--accent-primary);
-      backdrop-filter: blur(10px);
-    }
-
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    nav li {
-      margin: 0.5em 0;
-    }
-
-    nav a {
-      display: block;
-      padding: 0.75em 1.5em;
-      color: var(--text-primary);
-      text-decoration: none;
-      transition: all 0.3s ease;
-      border-left: 3px solid transparent;
-    }
-
-    nav a:hover {
-      background: rgba(255, 221, 0, 0.1);
-      border-left-color: var(--accent-primary);
-      padding-left: 2em;
-    }
-
-    nav a.current-page {
-      background: rgba(255, 221, 0, 0.2);
-      border-left-color: var(--accent-primary);
-      font-weight: bold;
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        position: fixed;
-        top: auto;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: auto;
-        border-right: none;
-        border-top: 2px solid var(--accent-primary);
-        padding: 0;
-        padding-bottom: env(safe-area-inset-bottom);
-      }
-
-      nav ul {
-        display: flex;
-        justify-content: space-around;
-        padding: 0.5em 0;
-      }
-
-      nav li {
-        margin: 0;
-        flex: 1;
-      }
-
-      nav a {
-        padding: 0.75em 0.5em;
-        text-align: center;
-        font-size: 0.85em;
-        border-left: none;
-        border-bottom: 3px solid transparent;
-      }
-
-      nav a:hover,
-      nav a.current-page {
-        padding-left: 0.5em;
-        border-left: none;
-        border-bottom-color: var(--accent-primary);
-      }
-    }
-
-    @media (hover: none) and (pointer: coarse) {
-      nav a:hover {
-        padding-left: 0.5em;
-      }
+      --highlight-bg: rgba(255, 221, 0, 0.15);
     }
 
     .blog-container {
@@ -302,28 +174,11 @@
       box-shadow: 0 5px 15px rgba(255, 221, 0, 0.3);
     }
 
-    a {
-      color: var(--accent-primary);
-      font-weight: bold;
-    }
-
-    a:hover {
-      color: var(--text-primary);
-    }
   </style>
 </head>
 <body>
 
-  <nav>
-    <ul>
-      <li><a href="home.html">Home</a></li>
-      <li><a href="freetime.html">Freetime</a></li>
-      <li><a href="blogs.html" class="current-page">Blogs</a></li>
-      <li><a href="cv.html">Career</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="games.html">Games</a></li>
-    </ul>
-  </nav>
+  <nav id="site-nav" data-current="blogs.html"></nav>
 
   <div class="blog-container">
     <article class="blog-article">
@@ -378,14 +233,7 @@
     </article>
   </div>
 
-  <script>
-    document.addEventListener("mousemove", (e) => {
-      const x = (e.clientX / window.innerWidth) * 100 + "%";
-      const y = (e.clientY / window.innerHeight) * 100 + "%";
-      document.body.style.setProperty("--mouse-x", x);
-      document.body.style.setProperty("--mouse-y", y);
-    });
-  </script>
+  <script src="shared.js"></script>
 
 </body>
 </html>

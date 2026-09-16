@@ -7,173 +7,40 @@
   <meta name="author" content="Miska Braun" />
   <meta name="keywords" content="Miska Braun, Hobbies, Travel, Ice Hockey, Family, Personal Life" />
   <title>Freetime - Miska Braun | What I actually care about</title>
-  
+
   <!-- Canonical URL -->
   <link rel="canonical" href="https://miskab.github.io/MiskaB/freetime.html">
-  
-  <!-- Open Graph / Facebook -->
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://miskab.github.io/MiskaB/freetime.html">
   <meta property="og:title" content="Freetime - Miska Braun | Hobbies & Personal Life">
   <meta property="og:description" content="Explore Miska Braun's personal interests in travel, ice hockey, cars, and family.">
   <meta property="og:image" content="https://miskab.github.io/MiskaB/images/Family_miska.PNG">
-  
+
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://miskab.github.io/MiskaB/freetime.html">
   <meta property="twitter:title" content="Freetime - Miska Braun | Hobbies & Personal Life">
   <meta property="twitter:description" content="Explore Miska Braun's personal interests in travel, ice hockey, cars, and family.">
   <meta property="twitter:image" content="https://miskab.github.io/MiskaB/images/Family_miska.PNG">
-  
+
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="images/AppleTouchIcon.png">
   <link rel="shortcut icon" href="images/AppleTouchIcon.png">
-  
-  <!-- PWA Manifest -->
+
+  <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="images/AppleTouchIcon.png">
   <meta name="theme-color" content="#ffd700">
-  
+
+  <!-- Preload hero background -->
+  <link rel="preload" as="image" href="images/AI_2025_Sky.png">
+
+  <!-- Shared styles -->
+  <link rel="stylesheet" href="styles.css">
+
   <style>
-    /* Single dark theme - no theme switching */
-    :root {
-      --bg-primary: #0a0a0a;
-      --text-primary: #ffffff;
-      --text-secondary: #e0e0e0;
-      --accent-primary: #ffdd00;
-      --accent-secondary: rgba(0,255,180,0.18);
-      --nav-bg: rgba(0, 0, 0, 0.8);
-      --nav-bg-hover: rgba(0, 0, 0, 0.95);
-      --card-bg: rgba(255,255,255,0.12);
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: url("images/AI_2025_Sky.png") no-repeat center center;
-      background-size: cover;
-      opacity: 0.82;
-      z-index: -1;
-      filter: grayscale(70%) blur(0.1px);
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      --mouse-x: 50%;
-      --mouse-y: 50%;
-      position: relative;
-    }
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--accent-secondary), transparent 60%);
-      mix-blend-mode: lighten;
-      transition: background 0.15s;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 200px;
-      height: 100vh;
-      background: rgba(10, 10, 10, 0.95);
-      padding: 2em 0;
-      z-index: 100;
-      border-right: 2px solid var(--accent-primary);
-      backdrop-filter: blur(10px);
-    }
-
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    nav li {
-      margin: 0.5em 0;
-    }
-
-    nav a {
-      display: block;
-      padding: 0.75em 1.5em;
-      color: var(--text-primary);
-      text-decoration: none;
-      transition: all 0.3s ease;
-      border-left: 3px solid transparent;
-    }
-
-    nav a:hover {
-      background: rgba(255, 221, 0, 0.1);
-      border-left-color: var(--accent-primary);
-      padding-left: 2em;
-    }
-
-    nav a.current-page {
-      background: rgba(255, 221, 0, 0.2);
-      border-left-color: var(--accent-primary);
-      font-weight: bold;
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        position: fixed;
-        top: auto;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: auto;
-        border-right: none;
-        border-top: 2px solid var(--accent-primary);
-        padding: 0;
-        padding-bottom: env(safe-area-inset-bottom);
-      }
-
-      nav ul {
-        display: flex;
-        justify-content: space-around;
-        padding: 0.5em 0;
-      }
-
-      nav li {
-        margin: 0;
-        flex: 1;
-      }
-
-      nav a {
-        padding: 0.75em 0.5em;
-        text-align: center;
-        font-size: 0.85em;
-        border-left: none;
-        border-bottom: 3px solid transparent;
-      }
-
-      nav a:hover,
-      nav a.current-page {
-        padding-left: 0.5em;
-        border-left: none;
-        border-bottom-color: var(--accent-primary);
-      }
-    }
-
-    @media (hover: none) and (pointer: coarse) {
-      nav a:hover {
-        padding-left: 0.5em;
-      }
-    }
-
     section {
       margin-left: 200px;
       padding: 2em;
@@ -191,12 +58,6 @@
         margin-left: 0;
         margin-bottom: 80px;
       }
-    }
-
-    h2 {
-      color: var(--text-primary);
-      border-bottom: 2px solid var(--text-secondary);
-      padding-bottom: 0.5em;
     }
 
     .text {
@@ -255,7 +116,6 @@
       width: 100vw;
       height: 100vh;
       background: rgba(0, 0, 0, 0.9);
-      display: flex;
       align-items: center;
       justify-content: center;
       z-index: 2000;
@@ -272,51 +132,6 @@
       display: flex;
     }
 
-    footer {
-      text-align: center;
-      padding: 2em;
-      background-color: var(--card-bg);
-      margin-top: 2em;
-      border-top: 1px solid var(--text-secondary);
-      color: var(--text-primary);
-    }
-
-    a {
-      color: var(--accent-primary);
-      font-weight: bold;
-    }
-
-    a:hover {
-      color: var(--text-primary);
-    }
-
-    .scroll-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
-      background: var(--accent-primary);
-      color: var(--bg-primary);
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      cursor: pointer;
-      font-size: 1.5rem;
-      transition: all 0.3s ease;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .scroll-to-top.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .scroll-to-top:hover {
-      transform: scale(1.1);
-    }
-
     @media (max-width: 768px) {
       .gallery img {
         width: 42vw;
@@ -326,17 +141,7 @@
 </head>
 <body>
 
-  <!-- Left-hand Vertical Navigation -->
-  <nav>
-    <ul>
-      <li><a href="home.html">Home</a></li>
-      <li><a href="freetime.html" class="current-page">Freetime</a></li>
-      <li><a href="blogs.html">Blogs</a></li>
-      <li><a href="cv.html">Career</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="games.html">Games</a></li>
-    </ul>
-  </nav>
+  <nav id="site-nav"></nav>
 
   <section id="freetime">
     <h2>Freetime</h2>
@@ -345,112 +150,58 @@
         I'm passionate about <strong>ice hockey</strong> and team sports, they keep me active, grounded, and offer a great way to connect with people. Whether it's coaching, playing, or cheering, hockey is a lifelong love. I recently also started very active gym to keep up with the physical training and endurance. This helps me to stay focused on other areas of life.
       </p>
       <p>
-        <strong>Traveling</strong> also plays a big role in my life. I’m always looking for ways to recharge and learn through new cultures, landscapes, and spontaneous adventures. Some people say that traveling is so tiring and they don´t like the airport lounges. I am completely the opposity. I get more energy from the huzzle and buzzle of airport. Expat and nomad by choice and I love it.
+        <strong>Traveling</strong> also plays a big role in my life. I'm always looking for ways to recharge and learn through new cultures, landscapes, and spontaneous adventures. Some people say that traveling is so tiring and they don´t like the airport lounges. I am completely the opposity. I get more energy from the huzzle and buzzle of airport. Expat and nomad by choice and I love it.
       </p>
       <p>
-        I’m also a vintage car enthusiast. Here is my <strong>Dodge Dart -64 GT</strong> located in Finland. You will often find me during the summer in cruising meet ups around southern Finland. I love the sound of v8 and the smell of petrol.
+        I'm also a vintage car enthusiast. Here is my <strong>Dodge Dart -64 GT</strong> located in Finland. You will often find me during the summer in cruising meet ups around southern Finland. I love the sound of v8 and the smell of petrol.
       </p>
       <p>
-        <strong>Family</strong> plays a central role in my life. It’s the foundation of my support system and a source of daily motivation. Whether it’s spending time together outdoors, sharing routines, or simply being present, those are the most meaningful moments. I have two of these tiny monkeys and they are the best, but really... they are the best.
+        <strong>Family</strong> plays a central role in my life. It's the foundation of my support system and a source of daily motivation. Whether it's spending time together outdoors, sharing routines, or simply being present, those are the most meaningful moments. I have two of these tiny monkeys and they are the best, but really... they are the best.
       </p>
-  </div>
-
-  <div class="gallery">
-    <div class="gallery-item">
-      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/icehockey.jpg" alt="Ice Hockey" onclick="openFullscreen(this)">
-      <div class="gallery-caption">
-        Ice Hockey
-      </div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/travel.jpg" alt="Nature Travel" onclick="openFullscreen(this)">
-      <div class="gallery-caption">
-        Traveling
-      </div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/car.jpg" alt="Dodge Dart GT" onclick="openFullscreen(this)">
-      <div class="gallery-caption">
-        Dodge Dart -64 GT
-      </div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/Family_miska.PNG" alt="Miska Family" onclick="openFullscreen(this)">
-      <div class="gallery-caption">
-        Me and the big monkey
-      </div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/daughters.png" alt="Family2" onclick="openFullscreen(this)">
-      <div class="gallery-caption">
-        Big and small monkey
-      </div>
-    </div>
-    <div class="gallery-item">
-      <img src="https://raw.githubusercontent.com/MiskaB/MiskaB/main/images/fatheranddaughter.png" alt="Family3" onclick="openFullscreen(this)">
-      <div class="gallery-caption">
-        Me and the small monkey
-      </div>
-    </div>
     </div>
 
-    <!-- Guiding text below the gallery -->
+    <div class="gallery">
+      <div class="gallery-item">
+        <img src="images/icehockey.jpg" alt="Ice Hockey" loading="lazy" onclick="openFullscreen(this)">
+        <div class="gallery-caption">Ice Hockey</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/travel.jpg" alt="Nature Travel" loading="lazy" onclick="openFullscreen(this)">
+        <div class="gallery-caption">Traveling</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/car.jpg" alt="Dodge Dart GT" loading="lazy" onclick="openFullscreen(this)">
+        <div class="gallery-caption">Dodge Dart -64 GT</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/Family_miska.PNG" alt="Miska Family" loading="lazy" onclick="openFullscreen(this)">
+        <div class="gallery-caption">Me and the big monkey</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/daughters.png" alt="Family2" loading="lazy" onclick="openFullscreen(this)">
+        <div class="gallery-caption">Big and small monkey</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/fatheranddaughter.png" alt="Family3" loading="lazy" onclick="openFullscreen(this)">
+        <div class="gallery-caption">Me and the small monkey</div>
+      </div>
+    </div>
+
     <p style="text-align: center; margin-top: 1em; font-style: italic; color: #555;">
       Click on any picture to enlarge it.
     </p>
   </section>
 
   <div class="fullscreen-img" id="fullscreen">
-    <img src="images/icehockey.jpg" alt="Expanded view" id="fullscreen-img">
+    <img src="" alt="Expanded view" id="fullscreen-img">
   </div>
 
-  <!-- Scroll to top button -->
-  <button class="scroll-to-top" onclick="scrollToTop()">
-    ↑
-  </button>
-
   <footer>
-    <p>&copy; 2025 Miska Braun</p>
+    <p>&copy; <span class="copyright-year">2025</span> Miska Braun</p>
   </footer>
 
+  <script src="shared.js"></script>
   <script src="main.js"></script>
-  <script>
-    document.addEventListener("mousemove", (e) => {
-      const x = (e.clientX / window.innerWidth) * 100 + "%";
-      const y = (e.clientY / window.innerHeight) * 100 + "%";
-      document.body.style.setProperty("--mouse-x", x);
-      document.body.style.setProperty("--mouse-y", y);
-    });
 
-    // Scroll to top functionality
-    function scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
-
-    // Show/hide scroll to top button
-    window.addEventListener("scroll", () => {
-      const scrollToTopBtn = document.querySelector('.scroll-to-top');
-      if (window.scrollY > 300) {
-        scrollToTopBtn.classList.add("visible");
-      } else {
-        scrollToTopBtn.classList.remove("visible");
-      }
-    });
-
-    // Fullscreen image functionality
-    function openFullscreen(imgElem) {
-      const fullscreen = document.getElementById('fullscreen');
-      const fullscreenImg = document.getElementById('fullscreen-img');
-      fullscreenImg.src = imgElem.src;
-      fullscreen.classList.add('active');
-      fullscreen.onclick = function () {
-        fullscreen.classList.remove('active');
-        fullscreenImg.src = '';
-      };
-    }
-  </script>
 </body>
 </html>
