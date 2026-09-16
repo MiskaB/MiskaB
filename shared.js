@@ -80,6 +80,35 @@
     }
   }
 
+  // --- Theme toggle ---
+  function initThemeToggle() {
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light-mode');
+    }
+    const btn = document.createElement('button');
+    btn.className = 'theme-toggle';
+    btn.setAttribute('aria-label', 'Toggle light/dark mode');
+    btn.textContent = document.body.classList.contains('light-mode') ? '◑' : '☀';
+    btn.addEventListener('click', () => {
+      const isLight = document.body.classList.toggle('light-mode');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      btn.textContent = isLight ? '◑' : '☀';
+    });
+    document.body.appendChild(btn);
+  }
+
+  // --- Reading time (blog posts only) ---
+  function initReadingTime() {
+    const content = document.querySelector('.blog-content');
+    if (!content) return;
+    const words = content.innerText.trim().split(/\s+/).length;
+    const minutes = Math.max(1, Math.round(words / 200));
+    const dateEl = document.querySelector('.blog-date');
+    if (dateEl) {
+      dateEl.textContent += ' · ' + minutes + ' min read';
+    }
+  }
+
   // --- Init ---
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
@@ -92,6 +121,8 @@
     updateCopyrightYear();
     initMouseTracking();
     initScrollToTop();
+    initThemeToggle();
+    initReadingTime();
     registerSW();
   }
 })();

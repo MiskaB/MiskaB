@@ -1,4 +1,4 @@
-const CACHE_NAME = 'miska-braun-portfolio-v2';
+const CACHE_NAME = 'miska-braun-portfolio-v3';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -16,6 +16,8 @@ const urlsToCache = [
   '/main.js',
   '/images/AI_2025_Sky.png',
   '/images/AppleTouchIcon.png',
+  '/images/icon-192.png',
+  '/images/icon-512.png',
   '/images/Profile_2025.jpeg',
   '/images/profile2.jpeg',
   '/images/MiskaBraun_CV.pdf',

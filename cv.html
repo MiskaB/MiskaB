@@ -208,6 +208,53 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       color: var(--bg-primary);
     }
+
+    @media print {
+      nav, .timeline-dots, .download-cv, .scroll-to-top, .theme-toggle {
+        display: none !important;
+      }
+
+      body::before, body::after {
+        display: none !important;
+      }
+
+      body {
+        background: white !important;
+        color: black !important;
+      }
+
+      .snap-container {
+        height: auto;
+        overflow: visible;
+        scroll-snap-type: none;
+      }
+
+      section {
+        margin-left: 0 !important;
+        min-height: auto;
+        page-break-inside: avoid;
+        border-bottom: 1px solid #ccc;
+        padding: 1.5em 0;
+        flex-direction: column;
+      }
+
+      .roles {
+        background: transparent;
+        padding: 0;
+      }
+
+      .roles h3 { color: #333; }
+      .skills h4 { color: #555; }
+
+      .skills li {
+        background: transparent;
+        border: 1px solid #999;
+      }
+
+      h2 { color: black !important; }
+
+      @page { margin: 1.5cm; }
+    }
   </style>
 </head>
 <body>

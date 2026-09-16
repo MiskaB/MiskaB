@@ -229,3 +229,69 @@ a:hover {
     bottom: 90px;
   }
 }
+
+/* --- Theme Toggle Button ---------------------------------- */
+.theme-toggle {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  z-index: 200;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border: 2px solid var(--accent-primary);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  background: rgba(255, 221, 0, 0.2);
+}
+
+/* --- Light Mode ------------------------------------------- */
+body.light-mode {
+  --bg-primary: #f0f0eb;
+  --text-primary: #1a1a1a;
+  --text-secondary: #333333;
+  --nav-bg: rgba(240, 240, 235, 0.97);
+  --nav-bg-hover: rgba(225, 225, 220, 1);
+  --card-bg: rgba(0, 0, 0, 0.06);
+  --card-bg-secondary: rgba(0, 0, 0, 0.10);
+  --input-bg: rgba(0, 0, 0, 0.05);
+  --input-border: rgba(0, 0, 0, 0.25);
+  --mouse-glow: rgba(0, 150, 80, 0.10);
+}
+
+body.light-mode::before {
+  opacity: 0.25;
+  filter: grayscale(80%) blur(1px);
+}
+
+body.light-mode::after {
+  mix-blend-mode: multiply;
+}
+
+body.light-mode nav {
+  background: rgba(240, 240, 235, 0.97);
+}
+
+body.light-mode nav a {
+  color: var(--text-primary);
+}
+
+body.light-mode nav a:hover {
+  background: rgba(255, 221, 0, 0.2);
+}
+
+body.light-mode footer {
+  border-top-color: rgba(0, 0, 0, 0.15);
+}
